@@ -1,6 +1,7 @@
 package logic;
 
 public enum Rank {
+
     ACE   (1),
     TWO   (2),
     THREE (3),
