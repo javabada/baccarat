@@ -6,11 +6,11 @@ import java.util.Collections;
 
 public class Shoe {
 
-    private final int shoeSize; // Amount of standard 52-card decks used (default = 8)
+    private final int decks; // Amount of standard 52-card decks being used (default = 8)
     private final List<Card> shoe;
 
-    public Shoe(int shoeSize) {
-        this.shoeSize = shoeSize;
+    public Shoe(int decks) {
+        this.decks = decks;
         this.shoe = new ArrayList<Card>();
         fill();
     }
@@ -30,7 +30,7 @@ public class Shoe {
     }
 
     private void fill() {
-        for (int i = 0; i < shoeSize; i++) {
+        for (int i = 0; i < decks; i++) {
             for (Suit suit : Suit.values()) {
                 for (Rank rank : Rank.values()) {
                     shoe.add( new Card(suit, rank) );
