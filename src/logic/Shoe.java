@@ -11,7 +11,7 @@ public class Shoe {
 
     public Shoe(int decks) {
         this.decks = decks;
-        this.shoe = new ArrayList<Card>();
+        this.shoe = new ArrayList<>();
         fill();
     }
 
@@ -37,7 +37,6 @@ public class Shoe {
                 }
             }
         }
-
         Collections.shuffle(shoe);
     }
 
