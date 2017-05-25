@@ -1,15 +1,20 @@
 import logic.Card;
 import logic.Shoe;
+import logic.Coup;
 
 public class Baccarat {
 
     public static void main(String[] args) {
-        Shoe testShoe = new Shoe();
-        for (int i = 0; i < 10; i++) {
-            Card card = testShoe.draw();
-            System.out.println(card);
+        Shoe shoe = new Shoe();
+        for (int i = 0; i < 5; i++) {
+            Coup coup = new Coup(shoe);
+            while (!coup.isCoupOver()) {
+                Card card = coup.deal();
+                System.out.println(card);
+            }
+            System.out.println(coup.getOutcome());
         }
-        System.out.println(testShoe.cardsRemaining());
+        System.out.println(shoe.cardsRemaining());
     }
 
 }
