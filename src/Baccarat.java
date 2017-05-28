@@ -1,20 +1,14 @@
-import logic.Card;
-import logic.Shoe;
-import logic.Coup;
+import javafx.application.Application;
+import javafx.stage.Stage;
 
-public class Baccarat {
+public class Baccarat extends Application {
 
     public static void main(String[] args) {
-        Shoe shoe = new Shoe();
-        for (int i = 0; i < 5; i++) {
-            Coup coup = new Coup(shoe);
-            while (!coup.isCoupOver()) {
-                Card card = coup.deal();
-                System.out.println(card);
-            }
-            System.out.println(coup.getOutcome());
-        }
-        System.out.println(shoe.cardsRemaining());
+        launch(args);
     }
 
+    @Override
+    public void start(Stage primaryStage) throws Exception {
+        primaryStage.setTitle("Baccarat");
+    }
 }

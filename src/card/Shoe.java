@@ -1,4 +1,4 @@
-package logic;
+package card;
 
 import java.util.List;
 import java.util.ArrayList;
@@ -6,17 +6,11 @@ import java.util.Collections;
 
 public class Shoe {
 
-    private final int decks; // Amount of standard 52-card decks being used (default = 8)
     private final List<Card> shoe;
 
     public Shoe(int decks) {
-        this.decks = decks;
-        this.shoe = new ArrayList<>();
-        fill();
-    }
-
-    public Shoe() {
-        this(8);
+        shoe = new ArrayList<>();
+        fill(decks);
     }
 
     public int cardsRemaining() {
@@ -24,12 +18,10 @@ public class Shoe {
     }
 
     public Card draw() {
-        Card card = shoe.get(0);
-        shoe.remove(0);
-        return card;
+        return shoe.remove(0);
     }
 
-    private void fill() {
+    private void fill(int decks) {
         for (int i = 0; i < decks; i++) {
             for (Suit suit : Suit.values()) {
                 for (Rank rank : Rank.values()) {

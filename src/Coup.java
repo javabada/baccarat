@@ -1,4 +1,5 @@
-package logic;
+import card.Card;
+import card.Shoe;
 
 public class Coup {
 
@@ -8,8 +9,8 @@ public class Coup {
     private int bankerScore;
     private boolean playerStanding;
     private boolean bankerStanding;
-    private boolean coupOver;
-    private int outcome; // Positive = player win, Negative = banker win, 0 = tie
+    private boolean coupFinished;
+    private int outcome;
 
     public Coup(Shoe shoe) {
         this.shoe = shoe;
@@ -18,7 +19,7 @@ public class Coup {
         this.bankerScore = 0;
         this.playerStanding = false;
         this.bankerStanding = false;
-        this.coupOver = false;
+        this.coupFinished = false;
         this.outcome = 0;
     }
 
@@ -38,17 +39,28 @@ public class Coup {
         return bankerStanding;
     }
 
-    public boolean isCoupOver() {
-        return coupOver;
+    public boolean isCoupFinished() {
+        return coupFinished;
     }
 
+    /*
+     * outcome = final player score - final banker score
+     * positive = player win, negative = banker win, 0 = tie
+     */
     public int getOutcome() {
         return outcome;
     }
 
+    /*
+     * Every time deal() is called a card is drawn from the shoe, whether the card is for the player hand
+     * or the banker hand is determined in the method. This is done to make the game more interactive,
+     * e.g. the user clicks a button to receive another card.
+     *
+     * Note: deal() should only be called while isCoupFinished() == false
+     */
     public Card deal() {
-        if (coupOver) {
-            return null; // Should not happen if isCoupOver() is checked before calling deal()
+        if (coupFinished) {
+            return null; // should not happen
         }
 
         Card card = shoe.draw();
@@ -66,24 +78,23 @@ public class Coup {
                 break;
             case 4:
                 bankerScore = (bankerScore + card.getValue()) % 10;
-                if (playerScore > 7 || bankerScore > 7) { // Natural, both hands stand
+                if (playerScore > 7 || bankerScore > 7) {
                     playerStanding = true;
                     bankerStanding = true;
                 }
                 else {
-                    if (playerScore > 5) { // Player stands with 6 or 7
+                    if (playerScore > 5) {
                         playerStanding = true;
                     }
-                    if (playerStanding && bankerScore > 5) { // If player stands, banker stands with 6 or 7
+                    if (playerStanding && bankerScore > 5) {
                         bankerStanding = true;
                     }
                 }
                 break;
             case 5:
-                if (!playerStanding) { // Player draws 3rd card
+                if (!playerStanding) {
                     playerScore = (playerScore + card.getValue()) % 10;
                     playerStanding = true;
-                    // Determine if banker should stand or draw 3rd card after player draws 3rd card
                     if (((card.getValue() == 2 || card.getValue() == 3) && bankerScore > 4) ||
                         ((card.getValue() == 4 || card.getValue() == 5) && bankerScore > 5) ||
                         ((card.getValue() == 6 || card.getValue() == 7) && bankerScore > 6) ||
@@ -92,7 +103,7 @@ public class Coup {
                         bankerStanding = true;
                     }
                 }
-                else { // Player stood, banker draws 3rd card
+                else {
                     bankerScore = (bankerScore + card.getValue()) % 10;
                     bankerStanding = true;
                 }
@@ -104,7 +115,7 @@ public class Coup {
         }
 
         if (playerStanding && bankerStanding) {
-            coupOver = true;
+            coupFinished = true;
             outcome = playerScore - bankerScore;
         }
 
