@@ -1,6 +1,4 @@
-package game;
-
-import card.Shoe;
+package com.github.javabada.baccarat.game;
 
 public class Game {
 
@@ -14,7 +12,6 @@ public class Game {
     private int minWager;
     private int maxWager;
     private Player player;
-    private Shoe shoe;
 
     public Game() {
     }
@@ -41,11 +38,6 @@ public class Game {
     public int getMaxWager() {
         return maxWager;
     }
-
-    public void newShoe() {
-        shoe = new Shoe(8);
-    }
-
 
 
 

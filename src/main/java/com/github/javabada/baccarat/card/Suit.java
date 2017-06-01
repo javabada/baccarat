@@ -1,4 +1,4 @@
-package card;
+package com.github.javabada.baccarat.card;
 
 public enum Suit {
     CLUBS,

@@ -1,4 +1,4 @@
-package card;
+package com.github.javabada.baccarat.card;
 
 public class Card {
 
