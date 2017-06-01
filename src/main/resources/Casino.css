@@ -1,0 +1,19 @@
+/* Home screen */
+#home-center {
+    -fx-alignment: center;
+    -fx-spacing: 20px;
+}
+
+#home-title {
+    -fx-font-size: 36px;
+    -fx-font-weight: bold;
+}
+
+#home-start-btn {
+    -fx-font-size: 16px;
+}
+
+#home-bottom {
+    -fx-alignment: bottom-right;
+    -fx-padding: 0px 10px 10px 0px;
+}

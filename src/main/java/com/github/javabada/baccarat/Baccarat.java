@@ -1,6 +1,8 @@
 package com.github.javabada.baccarat;
 
 import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
@@ -12,10 +14,12 @@ public class Baccarat extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        Scene homeScene = FXHome.createScene();
+        Parent root = FXMLLoader.load(getClass().getResource("/fxml/Home.fxml"));
+
+        Scene scene = new Scene(root);
 
         primaryStage.setTitle("Baccarat");
-        primaryStage.setScene(homeScene);
+        primaryStage.setScene(scene);
         primaryStage.show();
     }
 
