@@ -17,3 +17,18 @@
     -fx-alignment: bottom-right;
     -fx-padding: 0px 10px 10px 0px;
 }
+
+/* Game screen */
+.toggle-button {
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-pref-height: 75px;
+    -fx-pref-width: 75px;
+	-fx-background-radius: 50%;
+}
+
+#game-chips {
+    -fx-padding: 0px 0px 25px 25px;
+    -fx-hgap: 5px;
+    -fx-vgap: 5px;
+}
