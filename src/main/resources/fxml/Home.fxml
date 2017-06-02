@@ -12,7 +12,7 @@
     <center>
         <VBox id="home-center">
             <Label text="Welcome to Baccarat" id="home-title"/>
-            <Button text="Start" id="home-start-btn" fx:id="startButton" onAction="#handleStartButtonAction"/>
+            <Button text="Start" fx:id="startButton" onAction="#handleStartButtonAction"/>
         </VBox>
     </center>
 

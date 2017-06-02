@@ -25,13 +25,13 @@
             </GridPane>
 
             <HBox id="game-controls" pickOnBounds="false">
-                <Button text="Play" styleClass="game-btn"/>
-                <Button text="Clear" styleClass="game-btn"/>
+                <Button text="Play"/>
+                <Button text="Clear"/>
             </HBox>
 
-            <VBox id="game-stats" pickOnBounds="false">
-                <Button text="Stats" styleClass="game-btn"/>
-                <Button text="Log" styleClass="game-btn"/>
+            <VBox id="game-info" pickOnBounds="false">
+                <Button text="Stats"/>
+                <Button text="About"/>
             </VBox>
 
         </StackPane>

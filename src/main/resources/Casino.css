@@ -1,24 +1,11 @@
-/* Home screen */
-#home-center {
-    -fx-alignment: center;
-    -fx-spacing: 20px;
-}
-
-#home-title {
-    -fx-font-size: 36px;
+/* Controls classes */
+.button {
+    -fx-font-size: 14px;
     -fx-font-weight: bold;
+    -fx-pref-height: 65px;
+    -fx-pref-width: 65px;
 }
 
-#home-start-btn {
-    -fx-font-size: 16px;
-}
-
-#home-bottom {
-    -fx-alignment: bottom-right;
-    -fx-padding: 0px 10px 10px 0px;
-}
-
-/* Game screen */
 .toggle-button {
     -fx-font-size: 14px;
     -fx-font-weight: bold;
@@ -27,13 +14,23 @@
     -fx-background-radius: 50%;
 }
 
-.game-btn {
-    -fx-font-size: 14px;
-    -fx-font-weight: bold;
-    -fx-pref-height: 65px;
-    -fx-pref-width: 65px;
+/* Home screen */
+#home-center {
+    -fx-alignment: center;
+    -fx-spacing: 25px;
 }
 
+#home-title {
+    -fx-font-size: 36px;
+    -fx-font-weight: bold;
+}
+
+#home-bottom {
+    -fx-alignment: bottom-right;
+    -fx-padding: 0px 10px 10px 0px;
+}
+
+/* Game screen */
 #game-bottom {
     -fx-padding: 0px 25px 25px 25px;
 }
@@ -44,11 +41,11 @@
 }
 
 #game-controls {
-    -fx-alignment: center;
+    -fx-alignment: bottom-center;
     -fx-spacing: 5px;
 }
 
-#game-stats {
-    -fx-alignment: center-right;
+#game-info {
+    -fx-alignment: bottom-right;
     -fx-spacing: 5px;
 }
