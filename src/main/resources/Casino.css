@@ -20,15 +20,35 @@
 
 /* Game screen */
 .toggle-button {
-    -fx-font-size: 16px;
+    -fx-font-size: 14px;
     -fx-font-weight: bold;
-    -fx-pref-height: 75px;
-    -fx-pref-width: 75px;
-	-fx-background-radius: 50%;
+    -fx-pref-height: 65px;
+    -fx-pref-width: 65px;
+    -fx-background-radius: 50%;
+}
+
+.game-btn {
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-pref-height: 65px;
+    -fx-pref-width: 65px;
+}
+
+#game-bottom {
+    -fx-padding: 0px 25px 25px 25px;
 }
 
 #game-chips {
-    -fx-padding: 0px 0px 25px 25px;
     -fx-hgap: 5px;
     -fx-vgap: 5px;
+}
+
+#game-controls {
+    -fx-alignment: center;
+    -fx-spacing: 5px;
+}
+
+#game-stats {
+    -fx-alignment: center-right;
+    -fx-spacing: 5px;
 }

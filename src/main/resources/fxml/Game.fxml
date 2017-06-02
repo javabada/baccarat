@@ -10,17 +10,31 @@
             stylesheets="/Casino.css">
 
     <bottom>
-        <GridPane id="game-chips">
-            <fx:define>
-                <ToggleGroup fx:id="chipToggleGroup"/>
-            </fx:define>
-            <ToggleButton text="\$5" GridPane.rowIndex="0" GridPane.columnIndex="0" toggleGroup="$chipToggleGroup"/>
-            <ToggleButton text="\$10" GridPane.rowIndex="0" GridPane.columnIndex="1" toggleGroup="$chipToggleGroup"/>
-            <ToggleButton text="\$25" GridPane.rowIndex="0" GridPane.columnIndex="2" toggleGroup="$chipToggleGroup"/>
-            <ToggleButton text="\$100" GridPane.rowIndex="1" GridPane.columnIndex="0" toggleGroup="$chipToggleGroup"/>
-            <ToggleButton text="\$500" GridPane.rowIndex="1" GridPane.columnIndex="1" toggleGroup="$chipToggleGroup"/>
-            <ToggleButton text="\$1000" GridPane.rowIndex="1" GridPane.columnIndex="2" toggleGroup="$chipToggleGroup"/>
-        </GridPane>
+        <StackPane id="game-bottom">
+
+            <GridPane id="game-chips">
+                <fx:define>
+                    <ToggleGroup fx:id="chipToggleGroup"/>
+                </fx:define>
+                <ToggleButton text="\$5"    GridPane.rowIndex="0" GridPane.columnIndex="0" toggleGroup="$chipToggleGroup"/>
+                <ToggleButton text="\$10"   GridPane.rowIndex="0" GridPane.columnIndex="1" toggleGroup="$chipToggleGroup"/>
+                <ToggleButton text="\$25"   GridPane.rowIndex="0" GridPane.columnIndex="2" toggleGroup="$chipToggleGroup"/>
+                <ToggleButton text="\$100"  GridPane.rowIndex="1" GridPane.columnIndex="0" toggleGroup="$chipToggleGroup"/>
+                <ToggleButton text="\$500"  GridPane.rowIndex="1" GridPane.columnIndex="1" toggleGroup="$chipToggleGroup"/>
+                <ToggleButton text="\$1000" GridPane.rowIndex="1" GridPane.columnIndex="2" toggleGroup="$chipToggleGroup"/>
+            </GridPane>
+
+            <HBox id="game-controls" pickOnBounds="false">
+                <Button text="Play" styleClass="game-btn"/>
+                <Button text="Clear" styleClass="game-btn"/>
+            </HBox>
+
+            <VBox id="game-stats" pickOnBounds="false">
+                <Button text="Stats" styleClass="game-btn"/>
+                <Button text="Log" styleClass="game-btn"/>
+            </VBox>
+
+        </StackPane>
     </bottom>
 
 </BorderPane>
