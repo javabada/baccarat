@@ -10,11 +10,19 @@
             stylesheets="/Casino.css">
 
     <top>
-        <VBox id="game-top">
-            <Label text="Balance:" styleClass="game-label"/>
+        <HBox id="game-top">
+            <Label text="Balance: " styleClass="game-label"/>
             <Label fx:id="balanceNumberLabel" styleClass="game-label"/>
-        </VBox>
+        </HBox>
     </top>
+
+    <center>
+        <VBox id="game-center">
+            <Button fx:id="tieButton"/>
+            <Button fx:id="bankerButton"/>
+            <Button fx:id="playerButton"/>
+        </VBox>
+    </center>
 
     <bottom>
         <StackPane id="game-bottom">
@@ -23,12 +31,12 @@
                 <fx:define>
                     <ToggleGroup fx:id="chipToggleGroup"/>
                 </fx:define>
-                <ToggleButton text="\$5"    GridPane.rowIndex="0" GridPane.columnIndex="0" toggleGroup="$chipToggleGroup"/>
-                <ToggleButton text="\$10"   GridPane.rowIndex="0" GridPane.columnIndex="1" toggleGroup="$chipToggleGroup"/>
-                <ToggleButton text="\$25"   GridPane.rowIndex="0" GridPane.columnIndex="2" toggleGroup="$chipToggleGroup"/>
-                <ToggleButton text="\$100"  GridPane.rowIndex="1" GridPane.columnIndex="0" toggleGroup="$chipToggleGroup"/>
-                <ToggleButton text="\$500"  GridPane.rowIndex="1" GridPane.columnIndex="1" toggleGroup="$chipToggleGroup"/>
-                <ToggleButton text="\$1000" GridPane.rowIndex="1" GridPane.columnIndex="2" toggleGroup="$chipToggleGroup"/>
+                <ToggleButton text="\$5"    userData="5"    GridPane.rowIndex="0" GridPane.columnIndex="0" toggleGroup="$chipToggleGroup"/>
+                <ToggleButton text="\$10"   userData="10"   GridPane.rowIndex="0" GridPane.columnIndex="1" toggleGroup="$chipToggleGroup"/>
+                <ToggleButton text="\$25"   userData="25"   GridPane.rowIndex="0" GridPane.columnIndex="2" toggleGroup="$chipToggleGroup"/>
+                <ToggleButton text="\$100"  userData="100"  GridPane.rowIndex="1" GridPane.columnIndex="0" toggleGroup="$chipToggleGroup"/>
+                <ToggleButton text="\$500"  userData="500"  GridPane.rowIndex="1" GridPane.columnIndex="1" toggleGroup="$chipToggleGroup"/>
+                <ToggleButton text="\$1000" userData="1000" GridPane.rowIndex="1" GridPane.columnIndex="2" toggleGroup="$chipToggleGroup"/>
             </GridPane>
 
             <HBox id="game-controls-center" pickOnBounds="false">

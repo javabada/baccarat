@@ -13,8 +13,7 @@ import java.net.URISyntaxException;
 
 public class HomeController {
 
-    @FXML
-    private Button startButton;
+    @FXML private Button startButton;
 
     @FXML
     private void handleStartButtonAction(ActionEvent event) throws IOException {
