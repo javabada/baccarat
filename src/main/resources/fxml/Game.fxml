@@ -9,6 +9,13 @@
             prefHeight="600.0" prefWidth="800.0"
             stylesheets="/Casino.css">
 
+    <top>
+        <VBox id="game-top">
+            <Label text="Balance:" styleClass="game-label"/>
+            <Label fx:id="balanceNumberLabel" styleClass="game-label"/>
+        </VBox>
+    </top>
+
     <bottom>
         <StackPane id="game-bottom">
 
@@ -24,15 +31,15 @@
                 <ToggleButton text="\$1000" GridPane.rowIndex="1" GridPane.columnIndex="2" toggleGroup="$chipToggleGroup"/>
             </GridPane>
 
-            <HBox id="game-controls" pickOnBounds="false">
+            <HBox id="game-controls-center" pickOnBounds="false">
                 <Button text="Play"/>
                 <Button text="Clear"/>
             </HBox>
 
-            <VBox id="game-info" pickOnBounds="false">
-                <Button text="Stats"/>
-                <Button text="About"/>
-            </VBox>
+            <HBox id="game-controls-right" pickOnBounds="false">
+                <Button text="History"/>
+                <Button text="Settings"/>
+            </HBox>
 
         </StackPane>
     </bottom>

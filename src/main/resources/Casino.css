@@ -3,7 +3,7 @@
     -fx-font-size: 14px;
     -fx-font-weight: bold;
     -fx-pref-height: 65px;
-    -fx-pref-width: 65px;
+    -fx-pref-width: 100px;
 }
 
 .toggle-button {
@@ -31,6 +31,15 @@
 }
 
 /* Game screen */
+.game-label {
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+}
+
+#game-top {
+    -fx-padding: 25px 25px 0px 25px;
+}
+
 #game-bottom {
     -fx-padding: 0px 25px 25px 25px;
 }
@@ -40,12 +49,12 @@
     -fx-vgap: 5px;
 }
 
-#game-controls {
+#game-controls-center {
     -fx-alignment: bottom-center;
     -fx-spacing: 5px;
 }
 
-#game-info {
+#game-controls-right {
     -fx-alignment: bottom-right;
     -fx-spacing: 5px;
 }
