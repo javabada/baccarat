@@ -1,6 +1,9 @@
 package com.github.javabada.baccarat.game;
 
 import java.math.BigDecimal;
+import java.text.DecimalFormat;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Player {
 
@@ -8,38 +11,33 @@ public class Player {
     private static final int ROUNDING_MODE = BigDecimal.ROUND_HALF_UP;
 
     private BigDecimal balance;
+    private Map<WagerType, BigDecimal> wagers = new HashMap<>();
 
-    public Player() {
-        balance = BigDecimal.ZERO;
-        balance = balance.setScale(SCALE, ROUNDING_MODE);
+    public Player(String amount) {
+        balance = new BigDecimal(amount).setScale(SCALE, ROUNDING_MODE);
     }
 
-    public boolean setInitialBalance(int amount) {
-        if (amount <= 0) {
-            return false;
+    public String getBalanceString() {
+        DecimalFormat df = new DecimalFormat("#,##0.00");
+        return df.format(balance).replace(".00", "");
+    }
+
+    public void placeWager(WagerType type, String amount) {
+        BigDecimal wagerAmount = new BigDecimal(amount);
+
+        if (wagers.containsKey(type)) {
+            BigDecimal totalAmount = wagers.get(type).add(wagerAmount);
+            wagers.put(type, totalAmount);
         }
         else {
-            balance = new BigDecimal(amount);
-            balance = balance.setScale(SCALE, ROUNDING_MODE);
-            return true;
+            wagers.put(type, wagerAmount);
         }
+
+        balance = balance.subtract(wagerAmount);
     }
 
-    public BigDecimal getBalance() {
-        return balance;
-    }
-
-    public boolean bet(int amount) {
-        BigDecimal wager = new BigDecimal(amount);
-        wager = wager.setScale(SCALE, ROUNDING_MODE);
-        if (balance.compareTo(wager) < 0) {
-            return false;
-        }
-        else {
-            balance = balance.subtract(wager);
-            balance = balance.setScale(SCALE, ROUNDING_MODE);
-            return true;
-        }
-    }
+    // TODO
+    // reset()
+    // payout()
 
 }
