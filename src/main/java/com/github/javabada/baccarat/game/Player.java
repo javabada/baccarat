@@ -18,12 +18,15 @@ public class Player {
     }
 
     public String getBalanceString() {
-        DecimalFormat df = new DecimalFormat("#,##0.00");
-        return df.format(balance).replace(".00", "");
+        return formatToString(balance);
     }
 
-    public void placeWager(WagerType type, String amount) {
+    public boolean placeWager(WagerType type, String amount) {
         BigDecimal wagerAmount = new BigDecimal(amount);
+
+        if (wagerAmount.compareTo(balance) > 0) {
+            return false;
+        }
 
         if (wagers.containsKey(type)) {
             BigDecimal totalAmount = wagers.get(type).add(wagerAmount);
@@ -34,10 +37,22 @@ public class Player {
         }
 
         balance = balance.subtract(wagerAmount);
+        return true;
+    }
+
+    public void clear() {
+        for (WagerType type : wagers.keySet()) {
+            balance = balance.add(wagers.get(type));
+        }
+        wagers.clear();
     }
 
     // TODO
-    // reset()
     // payout()
+
+    private String formatToString(BigDecimal amount) {
+        DecimalFormat df = new DecimalFormat("#,##0.00");
+        return df.format(amount).replace(".00", "");
+    }
 
 }
