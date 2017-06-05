@@ -1,6 +1,6 @@
 package com.github.javabada.baccarat.card;
 
-public enum Suit {
+public enum CardSuit {
     CLUBS,
     DIAMONDS,
     HEARTS,

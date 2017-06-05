@@ -2,22 +2,22 @@ package com.github.javabada.baccarat.card;
 
 public class Card {
 
-    private final Suit suit;
-    private final Rank rank;
+    private final CardRank rank;
+    private final CardSuit suit;
     private final int value;
 
-    public Card(Suit suit, Rank rank) {
-        this.suit = suit;
+    public Card(CardRank rank, CardSuit suit) {
         this.rank = rank;
+        this.suit = suit;
         this.value = rank.getValue();
     }
 
-    public Suit getSuit() {
-        return suit;
+    public CardRank getRank() {
+        return rank;
     }
 
-    public Rank getRank() {
-        return rank;
+    public CardSuit getSuit() {
+        return suit;
     }
 
     public int getValue() {
@@ -26,7 +26,25 @@ public class Card {
 
     @Override
     public String toString() {
-        return value + " - " + rank + " of " + suit;
+        return rank + " of " + suit;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Card card = (Card) o;
+
+        if (rank != card.rank) return false;
+        return suit == card.suit;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = rank.hashCode();
+        result = 31 * result + suit.hashCode();
+        return result;
     }
 
 }

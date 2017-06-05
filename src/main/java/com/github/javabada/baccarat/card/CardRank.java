@@ -1,6 +1,6 @@
 package com.github.javabada.baccarat.card;
 
-public enum Rank {
+public enum CardRank {
 
     ACE   (1),
     TWO   (2),
@@ -18,7 +18,7 @@ public enum Rank {
 
     private final int value;
 
-    Rank(int value) {
+    CardRank(int value) {
         this.value = value;
     }
 

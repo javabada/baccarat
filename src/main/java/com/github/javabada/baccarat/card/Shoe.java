@@ -6,10 +6,9 @@ import java.util.List;
 
 public class Shoe {
 
-    private final List<Card> shoe;
+    private final List<Card> shoe = new ArrayList<>();
 
     public Shoe(int decks) {
-        shoe = new ArrayList<>();
         fill(decks);
     }
 
@@ -23,9 +22,9 @@ public class Shoe {
 
     private void fill(int decks) {
         for (int i = 0; i < decks; i++) {
-            for (Suit suit : Suit.values()) {
-                for (Rank rank : Rank.values()) {
-                    shoe.add( new Card(suit, rank) );
+            for (CardRank rank : CardRank.values()) {
+                for (CardSuit suit : CardSuit.values()) {
+                    shoe.add(new Card(rank, suit));
                 }
             }
         }
