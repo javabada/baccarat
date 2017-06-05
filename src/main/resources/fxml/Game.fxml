@@ -18,9 +18,9 @@
 
     <center>
         <VBox id="game-center">
-            <Button fx:id="tieButton"/>
-            <Button fx:id="bankerButton"/>
-            <Button fx:id="playerButton"/>
+            <Button fx:id="tieButton"    onAction="#handlePlaceWagerButtonAction"/>
+            <Button fx:id="bankerButton" onAction="#handlePlaceWagerButtonAction"/>
+            <Button fx:id="playerButton" onAction="#handlePlaceWagerButtonAction"/>
         </VBox>
     </center>
 
@@ -39,9 +39,13 @@
                 <ToggleButton text="\$1000" userData="1000" GridPane.rowIndex="1" GridPane.columnIndex="2" toggleGroup="$chipToggleGroup"/>
             </GridPane>
 
+            <VBox id="game-message" pickOnBounds="false">
+                <Label fx:id="messageLabel" styleClass="game-label"/>
+            </VBox>
+
             <HBox id="game-controls-center" pickOnBounds="false">
                 <Button text="Play"/>
-                <Button text="Clear"/>
+                <Button text="Clear" onAction="#handleClearButtonAction"/>
             </HBox>
 
             <HBox id="game-controls-right" pickOnBounds="false">
