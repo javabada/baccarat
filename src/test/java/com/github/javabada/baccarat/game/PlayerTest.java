@@ -22,14 +22,14 @@ public class PlayerTest {
         Player player = new Player("1000");
         boolean wagerPlaced;
 
-        wagerPlaced = player.placeWager(WagerType.PLAYER, "100");
+        wagerPlaced = player.placeWager(Outcome.PLAYER, "100");
         assertTrue(wagerPlaced);
-        assertEquals("100.00", player.checkWager(WagerType.PLAYER).toPlainString());
+        assertEquals("100.00", player.checkWager(Outcome.PLAYER).toPlainString());
         assertEquals("900.00", player.getBalance().toPlainString());
 
-        wagerPlaced = player.placeWager(WagerType.PLAYER, "0.25");
+        wagerPlaced = player.placeWager(Outcome.PLAYER, "0.25");
         assertTrue(wagerPlaced);
-        assertEquals("100.25", player.checkWager(WagerType.PLAYER).toPlainString());
+        assertEquals("100.25", player.checkWager(Outcome.PLAYER).toPlainString());
         assertEquals("899.75", player.getBalance().toPlainString());
     }
 
@@ -38,19 +38,19 @@ public class PlayerTest {
         Player player = new Player("1000");
         boolean wagerPlaced;
 
-        wagerPlaced = player.placeWager(WagerType.PLAYER, "1100");
+        wagerPlaced = player.placeWager(Outcome.PLAYER, "1100");
         assertFalse(wagerPlaced);
-        assertEquals("0.00", player.checkWager(WagerType.PLAYER).toPlainString());
+        assertEquals("0.00", player.checkWager(Outcome.PLAYER).toPlainString());
         assertEquals("1000.00", player.getBalance().toPlainString());
 
-        wagerPlaced = player.placeWager(WagerType.PLAYER, "1000");
+        wagerPlaced = player.placeWager(Outcome.PLAYER, "1000");
         assertTrue(wagerPlaced);
-        assertEquals("1000.00", player.checkWager(WagerType.PLAYER).toPlainString());
+        assertEquals("1000.00", player.checkWager(Outcome.PLAYER).toPlainString());
         assertEquals("0.00", player.getBalance().toPlainString());
 
-        wagerPlaced = player.placeWager(WagerType.PLAYER, "100");
+        wagerPlaced = player.placeWager(Outcome.PLAYER, "100");
         assertFalse(wagerPlaced);
-        assertEquals("1000.00", player.checkWager(WagerType.PLAYER).toPlainString());
+        assertEquals("1000.00", player.checkWager(Outcome.PLAYER).toPlainString());
         assertEquals("0.00", player.getBalance().toPlainString());
     }
 
@@ -58,9 +58,9 @@ public class PlayerTest {
     public void testClear() throws Exception {
         Player player = new Player("1000");
 
-        player.placeWager(WagerType.PLAYER, "100");
+        player.placeWager(Outcome.PLAYER, "100");
         player.clear();
-        assertEquals("0.00", player.checkWager(WagerType.PLAYER).toPlainString());
+        assertEquals("0.00", player.checkWager(Outcome.PLAYER).toPlainString());
         assertEquals("1000.00", player.getBalance().toPlainString());
     }
 

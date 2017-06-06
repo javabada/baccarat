@@ -1,29 +1,21 @@
 package com.github.javabada.baccarat.game;
 
 import com.github.javabada.baccarat.card.Card;
-import com.github.javabada.baccarat.card.Shoe;
+
+import java.util.HashSet;
+import java.util.Set;
 
 public class Coup {
 
-    private final Shoe shoe;
-    private int cardsDealt;
-    private int playerScore;
-    private int bankerScore;
-    private boolean playerStanding;
-    private boolean bankerStanding;
-    private boolean coupFinished;
-    private int outcome;
+    private int cardsDealt = 0;
+    private boolean playerStanding = false;
+    private boolean bankerStanding = false;
 
-    public Coup(Shoe shoe) {
-        this.shoe = shoe;
-        this.cardsDealt = 0;
-        this.playerScore = 0;
-        this.bankerScore = 0;
-        this.playerStanding = false;
-        this.bankerStanding = false;
-        this.coupFinished = false;
-        this.outcome = 0;
-    }
+    private int playerScore = 0;
+    private int bankerScore = 0;
+    private boolean playerHand = true;
+    private boolean coupFinished = false;
+    private final Set<Outcome> winningOutcomes = new HashSet<>();
 
     public int getPlayerScore() {
         return playerScore;
@@ -33,53 +25,43 @@ public class Coup {
         return bankerScore;
     }
 
-    public boolean isPlayerStanding() {
-        return playerStanding;
-    }
-
-    public boolean isBankerStanding() {
-        return bankerStanding;
+    public boolean isPlayerHand() {
+        return playerHand;
     }
 
     public boolean isCoupFinished() {
         return coupFinished;
     }
 
-    /*
-     * outcome = final player score - final banker score
-     * positive = player win, negative = banker win, 0 = tie
-     */
-    public int getOutcome() {
-        return outcome;
+    public Set<Outcome> getWinningOutcomes() {
+        if (!coupFinished) throw new IllegalStateException();
+        return winningOutcomes;
     }
 
-    /*
-     * Every time deal() is called a card is drawn from the shoe, whether the card is for the player hand
-     * or the banker hand is determined in the method. This is done to make the game more interactive,
-     * e.g. the user clicks a button to receive another card.
-     *
-     * Note: deal() should only be called while isCoupFinished() == false
-     */
-    public Card deal() {
-        if (coupFinished) {
-            return null; // should not happen
-        }
+    public void deal(Card card) {
+        if (coupFinished) throw new IllegalStateException();
 
-        Card card = shoe.draw();
         cardsDealt++;
 
         switch (cardsDealt) {
             case 1:
                 playerScore = card.getValue();
+                playerHand = true;
                 break;
+
             case 2:
                 bankerScore = card.getValue();
+                playerHand = false;
                 break;
+
             case 3:
                 playerScore = (playerScore + card.getValue()) % 10;
+                playerHand = true;
                 break;
+
             case 4:
                 bankerScore = (bankerScore + card.getValue()) % 10;
+                playerHand = false;
                 if (playerScore > 7 || bankerScore > 7) {
                     playerStanding = true;
                     bankerStanding = true;
@@ -93,35 +75,47 @@ public class Coup {
                     }
                 }
                 break;
+
             case 5:
                 if (!playerStanding) {
                     playerScore = (playerScore + card.getValue()) % 10;
+                    playerHand = true;
                     playerStanding = true;
                     if (((card.getValue() == 2 || card.getValue() == 3) && bankerScore > 4) ||
                         ((card.getValue() == 4 || card.getValue() == 5) && bankerScore > 5) ||
                         ((card.getValue() == 6 || card.getValue() == 7) && bankerScore > 6) ||
-                        (card.getValue() == 8 && bankerScore > 2) ||
-                        ((card.getValue() == 9 || card.getValue() < 2) && bankerScore > 3)) {
+                         (card.getValue() == 8                          && bankerScore > 2) ||
+                        ((card.getValue() == 9 || card.getValue() <  2) && bankerScore > 3)) {
                         bankerStanding = true;
                     }
                 }
                 else {
                     bankerScore = (bankerScore + card.getValue()) % 10;
+                    playerHand = false;
                     bankerStanding = true;
                 }
                 break;
+
             case 6:
                 bankerScore = (bankerScore + card.getValue()) % 10;
+                playerHand = false;
                 bankerStanding = true;
                 break;
         }
 
         if (playerStanding && bankerStanding) {
             coupFinished = true;
-            outcome = playerScore - bankerScore;
-        }
 
-        return card;
+            if (playerScore > bankerScore) {
+                winningOutcomes.add(Outcome.PLAYER);
+            }
+            else if (bankerScore > playerScore) {
+                winningOutcomes.add(Outcome.BANKER);
+            }
+            else {
+                winningOutcomes.add(Outcome.TIE);
+            }
+        }
     }
 
 }

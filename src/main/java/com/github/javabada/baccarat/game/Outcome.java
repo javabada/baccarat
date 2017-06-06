@@ -2,7 +2,7 @@ package com.github.javabada.baccarat.game;
 
 import java.math.BigDecimal;
 
-public enum WagerType {
+public enum Outcome {
 
     PLAYER ("1"),
     BANKER ("0.95"),
@@ -10,7 +10,7 @@ public enum WagerType {
 
     private final BigDecimal odds;
 
-    WagerType(String odds) {
+    Outcome(String odds) {
         this.odds = new BigDecimal(odds);
     }
 

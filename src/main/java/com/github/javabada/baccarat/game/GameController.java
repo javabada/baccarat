@@ -44,21 +44,21 @@ public class GameController {
         boolean wagerPlaced;
 
         if (event.getSource() == tieButton) {
-            wagerPlaced = player.placeWager(WagerType.TIE, wagerAmount);
+            wagerPlaced = player.placeWager(Outcome.TIE, wagerAmount);
             if (wagerPlaced) {
-                tieButton.setText("Tie\n" + formatToCurrency(player.checkWager(WagerType.TIE)));
+                tieButton.setText("Tie\n" + formatToCurrency(player.checkWager(Outcome.TIE)));
             }
         }
         else if (event.getSource() == bankerButton) {
-            wagerPlaced = player.placeWager(WagerType.BANKER, wagerAmount);
+            wagerPlaced = player.placeWager(Outcome.BANKER, wagerAmount);
             if (wagerPlaced) {
-                bankerButton.setText("Banker\n" + formatToCurrency(player.checkWager(WagerType.BANKER)));
+                bankerButton.setText("Banker\n" + formatToCurrency(player.checkWager(Outcome.BANKER)));
             }
         }
         else {
-            wagerPlaced = player.placeWager(WagerType.PLAYER, wagerAmount);
+            wagerPlaced = player.placeWager(Outcome.PLAYER, wagerAmount);
             if (wagerPlaced) {
-                playerButton.setText("Player\n" + formatToCurrency(player.checkWager(WagerType.PLAYER)));
+                playerButton.setText("Player\n" + formatToCurrency(player.checkWager(Outcome.PLAYER)));
             }
         }
 
