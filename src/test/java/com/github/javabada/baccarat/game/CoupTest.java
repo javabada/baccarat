@@ -18,29 +18,26 @@ public class CoupTest {
         assertEquals(5, coup.getPlayerScore());
         assertEquals(0, coup.getBankerScore());
         assertTrue(coup.isPlayerHand());
-        assertFalse(coup.isCoupFinished());
+        assertFalse(coup.isFinished());
 
         coup.deal(new Card(CardRank.FIVE, CardSuit.DIAMONDS));
         assertEquals(5, coup.getPlayerScore());
         assertEquals(5, coup.getBankerScore());
         assertFalse(coup.isPlayerHand());
-        assertFalse(coup.isCoupFinished());
+        assertFalse(coup.isFinished());
 
         coup.deal(new Card(CardRank.FOUR, CardSuit.DIAMONDS));
         assertEquals(9, coup.getPlayerScore());
         assertEquals(5, coup.getBankerScore());
         assertTrue(coup.isPlayerHand());
-        assertFalse(coup.isCoupFinished());
+        assertFalse(coup.isFinished());
 
         coup.deal(new Card(CardRank.EIGHT, CardSuit.DIAMONDS));
         assertEquals(9, coup.getPlayerScore());
         assertEquals(3, coup.getBankerScore());
         assertFalse(coup.isPlayerHand());
-        assertTrue(coup.isCoupFinished());
-
-        assertTrue(coup.getWinningOutcomes().contains(Outcome.PLAYER));
-        assertFalse(coup.getWinningOutcomes().contains(Outcome.BANKER));
-        assertFalse(coup.getWinningOutcomes().contains(Outcome.TIE));
+        assertTrue(coup.isFinished());
+        assertEquals(Outcome.PLAYER, coup.getWinningBet());
     }
 
     @Test
@@ -51,29 +48,26 @@ public class CoupTest {
         assertEquals(5, coup.getPlayerScore());
         assertEquals(0, coup.getBankerScore());
         assertTrue(coup.isPlayerHand());
-        assertFalse(coup.isCoupFinished());
+        assertFalse(coup.isFinished());
 
         coup.deal(new Card(CardRank.FIVE, CardSuit.DIAMONDS));
         assertEquals(5, coup.getPlayerScore());
         assertEquals(5, coup.getBankerScore());
         assertFalse(coup.isPlayerHand());
-        assertFalse(coup.isCoupFinished());
+        assertFalse(coup.isFinished());
 
         coup.deal(new Card(CardRank.ACE, CardSuit.DIAMONDS));
         assertEquals(6, coup.getPlayerScore());
         assertEquals(5, coup.getBankerScore());
         assertTrue(coup.isPlayerHand());
-        assertFalse(coup.isCoupFinished());
+        assertFalse(coup.isFinished());
 
         coup.deal(new Card(CardRank.TWO, CardSuit.DIAMONDS));
         assertEquals(6, coup.getPlayerScore());
         assertEquals(7, coup.getBankerScore());
         assertFalse(coup.isPlayerHand());
-        assertTrue(coup.isCoupFinished());
-
-        assertFalse(coup.getWinningOutcomes().contains(Outcome.PLAYER));
-        assertTrue(coup.getWinningOutcomes().contains(Outcome.BANKER));
-        assertFalse(coup.getWinningOutcomes().contains(Outcome.TIE));
+        assertTrue(coup.isFinished());
+        assertEquals(Outcome.BANKER, coup.getWinningBet());
     }
 
     @Test
@@ -84,35 +78,32 @@ public class CoupTest {
         assertEquals(5, coup.getPlayerScore());
         assertEquals(0, coup.getBankerScore());
         assertTrue(coup.isPlayerHand());
-        assertFalse(coup.isCoupFinished());
+        assertFalse(coup.isFinished());
 
         coup.deal(new Card(CardRank.FIVE, CardSuit.DIAMONDS));
         assertEquals(5, coup.getPlayerScore());
         assertEquals(5, coup.getBankerScore());
         assertFalse(coup.isPlayerHand());
-        assertFalse(coup.isCoupFinished());
+        assertFalse(coup.isFinished());
 
         coup.deal(new Card(CardRank.KING, CardSuit.DIAMONDS));
         assertEquals(5, coup.getPlayerScore());
         assertEquals(5, coup.getBankerScore());
         assertTrue(coup.isPlayerHand());
-        assertFalse(coup.isCoupFinished());
+        assertFalse(coup.isFinished());
 
         coup.deal(new Card(CardRank.TWO, CardSuit.DIAMONDS));
         assertEquals(5, coup.getPlayerScore());
         assertEquals(7, coup.getBankerScore());
         assertFalse(coup.isPlayerHand());
-        assertFalse(coup.isCoupFinished());
+        assertFalse(coup.isFinished());
 
         coup.deal(new Card(CardRank.ACE, CardSuit.DIAMONDS));
         assertEquals(6, coup.getPlayerScore());
         assertEquals(7, coup.getBankerScore());
         assertTrue(coup.isPlayerHand());
-        assertTrue(coup.isCoupFinished());
-
-        assertFalse(coup.getWinningOutcomes().contains(Outcome.PLAYER));
-        assertTrue(coup.getWinningOutcomes().contains(Outcome.BANKER));
-        assertFalse(coup.getWinningOutcomes().contains(Outcome.TIE));
+        assertTrue(coup.isFinished());
+        assertEquals(Outcome.BANKER, coup.getWinningBet());
     }
 
     @Test
@@ -123,35 +114,32 @@ public class CoupTest {
         assertEquals(5, coup.getPlayerScore());
         assertEquals(0, coup.getBankerScore());
         assertTrue(coup.isPlayerHand());
-        assertFalse(coup.isCoupFinished());
+        assertFalse(coup.isFinished());
 
         coup.deal(new Card(CardRank.FIVE, CardSuit.DIAMONDS));
         assertEquals(5, coup.getPlayerScore());
         assertEquals(5, coup.getBankerScore());
         assertFalse(coup.isPlayerHand());
-        assertFalse(coup.isCoupFinished());
+        assertFalse(coup.isFinished());
 
         coup.deal(new Card(CardRank.ACE, CardSuit.DIAMONDS));
         assertEquals(6, coup.getPlayerScore());
         assertEquals(5, coup.getBankerScore());
         assertTrue(coup.isPlayerHand());
-        assertFalse(coup.isCoupFinished());
+        assertFalse(coup.isFinished());
 
         coup.deal(new Card(CardRank.KING, CardSuit.DIAMONDS));
         assertEquals(6, coup.getPlayerScore());
         assertEquals(5, coup.getBankerScore());
         assertFalse(coup.isPlayerHand());
-        assertFalse(coup.isCoupFinished());
+        assertFalse(coup.isFinished());
 
         coup.deal(new Card(CardRank.ACE, CardSuit.DIAMONDS));
         assertEquals(6, coup.getPlayerScore());
         assertEquals(6, coup.getBankerScore());
         assertFalse(coup.isPlayerHand());
-        assertTrue(coup.isCoupFinished());
-
-        assertFalse(coup.getWinningOutcomes().contains(Outcome.PLAYER));
-        assertFalse(coup.getWinningOutcomes().contains(Outcome.BANKER));
-        assertTrue(coup.getWinningOutcomes().contains(Outcome.TIE));
+        assertTrue(coup.isFinished());
+        assertEquals(Outcome.TIE, coup.getWinningBet());
     }
 
     @Test
@@ -162,47 +150,44 @@ public class CoupTest {
         assertEquals(5, coup.getPlayerScore());
         assertEquals(0, coup.getBankerScore());
         assertTrue(coup.isPlayerHand());
-        assertFalse(coup.isCoupFinished());
+        assertFalse(coup.isFinished());
 
         coup.deal(new Card(CardRank.FIVE, CardSuit.DIAMONDS));
         assertEquals(5, coup.getPlayerScore());
         assertEquals(5, coup.getBankerScore());
         assertFalse(coup.isPlayerHand());
-        assertFalse(coup.isCoupFinished());
+        assertFalse(coup.isFinished());
 
         coup.deal(new Card(CardRank.KING, CardSuit.DIAMONDS));
         assertEquals(5, coup.getPlayerScore());
         assertEquals(5, coup.getBankerScore());
         assertTrue(coup.isPlayerHand());
-        assertFalse(coup.isCoupFinished());
+        assertFalse(coup.isFinished());
 
         coup.deal(new Card(CardRank.KING, CardSuit.DIAMONDS));
         assertEquals(5, coup.getPlayerScore());
         assertEquals(5, coup.getBankerScore());
         assertFalse(coup.isPlayerHand());
-        assertFalse(coup.isCoupFinished());
+        assertFalse(coup.isFinished());
 
         coup.deal(new Card(CardRank.FOUR, CardSuit.DIAMONDS));
         assertEquals(9, coup.getPlayerScore());
         assertEquals(5, coup.getBankerScore());
         assertTrue(coup.isPlayerHand());
-        assertFalse(coup.isCoupFinished());
+        assertFalse(coup.isFinished());
 
         coup.deal(new Card(CardRank.KING, CardSuit.DIAMONDS));
         assertEquals(9, coup.getPlayerScore());
         assertEquals(5, coup.getBankerScore());
         assertFalse(coup.isPlayerHand());
-        assertTrue(coup.isCoupFinished());
-
-        assertTrue(coup.getWinningOutcomes().contains(Outcome.PLAYER));
-        assertFalse(coup.getWinningOutcomes().contains(Outcome.BANKER));
-        assertFalse(coup.getWinningOutcomes().contains(Outcome.TIE));
+        assertTrue(coup.isFinished());
+        assertEquals(Outcome.PLAYER, coup.getWinningBet());
     }
 
     @Test (expected = IllegalStateException.class)
     public void testGetWinningOutcomesIllegalStateException() throws Exception {
         Coup coup = new Coup();
-        coup.getWinningOutcomes();
+        coup.getWinningBet();
     }
 
     @Test (expected = IllegalStateException.class)

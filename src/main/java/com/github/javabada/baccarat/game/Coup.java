@@ -2,9 +2,6 @@ package com.github.javabada.baccarat.game;
 
 import com.github.javabada.baccarat.card.Card;
 
-import java.util.HashSet;
-import java.util.Set;
-
 public class Coup {
 
     private int cardsDealt = 0;
@@ -14,8 +11,8 @@ public class Coup {
     private int playerScore = 0;
     private int bankerScore = 0;
     private boolean playerHand = true;
-    private boolean coupFinished = false;
-    private final Set<Outcome> winningOutcomes = new HashSet<>();
+    private boolean finished = false;
+    private Outcome winningBet;
 
     public int getPlayerScore() {
         return playerScore;
@@ -29,17 +26,17 @@ public class Coup {
         return playerHand;
     }
 
-    public boolean isCoupFinished() {
-        return coupFinished;
+    public boolean isFinished() {
+        return finished;
     }
 
-    public Set<Outcome> getWinningOutcomes() {
-        if (!coupFinished) throw new IllegalStateException();
-        return winningOutcomes;
+    public Outcome getWinningBet() {
+        if (!finished) throw new IllegalStateException();
+        return winningBet;
     }
 
     public void deal(Card card) {
-        if (coupFinished) throw new IllegalStateException();
+        if (finished) throw new IllegalStateException();
 
         cardsDealt++;
 
@@ -104,16 +101,16 @@ public class Coup {
         }
 
         if (playerStanding && bankerStanding) {
-            coupFinished = true;
+            finished = true;
 
             if (playerScore > bankerScore) {
-                winningOutcomes.add(Outcome.PLAYER);
+                winningBet = Outcome.PLAYER;
             }
             else if (bankerScore > playerScore) {
-                winningOutcomes.add(Outcome.BANKER);
+                winningBet = Outcome.BANKER;
             }
             else {
-                winningOutcomes.add(Outcome.TIE);
+                winningBet = Outcome.TIE;
             }
         }
     }
