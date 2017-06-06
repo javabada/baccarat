@@ -20,44 +20,59 @@ public class Player {
         return balance;
     }
 
-    /*
-     * Balance is deducted as wagers are placed, calling clear() will undo all placed wagers and add them back.
-     * If a potential wager is greater than the balance, this method will return false without any changes.
+    /* Balance is deducted as wagers are placed, calling clear() will undo all placed wagers.
+     * Returns false without any changes if potential wager is greater than balance.
      */
-    public boolean placeWager(Outcome type, String amount) {
+    public boolean placeWager(Outcome outcome, String amount) {
         BigDecimal wagerAmount = new BigDecimal(amount).setScale(SCALE, ROUNDING_MODE);
 
         if (wagerAmount.compareTo(balance) > 0) {
             return false;
         }
 
-        if (wagers.containsKey(type)) {
-            BigDecimal totalAmount = wagers.get(type).add(wagerAmount);
-            wagers.put(type, totalAmount);
+        if (wagers.containsKey(outcome)) {
+            BigDecimal totalAmount = wagers.get(outcome).add(wagerAmount);
+            wagers.put(outcome, totalAmount);
         }
         else {
-            wagers.put(type, wagerAmount);
+            wagers.put(outcome, wagerAmount);
         }
 
         balance = balance.subtract(wagerAmount);
         return true;
     }
 
-    public BigDecimal checkWager(Outcome type) {
-        if (wagers.containsKey(type)) {
-            return wagers.get(type);
+    public BigDecimal checkWager(Outcome outcome) {
+        if (wagers.containsKey(outcome)) {
+            return wagers.get(outcome);
         }
-        return BigDecimal.ZERO.setScale(SCALE, ROUNDING_MODE);
+        return BigDecimal.ZERO.setScale(SCALE);
     }
 
     public void clear() {
-        for (Outcome type : wagers.keySet()) {
-            balance = balance.add(wagers.get(type));
+        for (Outcome outcome : wagers.keySet()) {
+            balance = balance.add(wagers.get(outcome));
         }
         wagers.clear();
     }
 
-    // TODO
-    // payout()
+    public BigDecimal settle(Outcome winningOutcome) {
+        BigDecimal winnings = BigDecimal.ZERO.setScale(SCALE);
+
+        if (winningOutcome == Outcome.TIE) {
+            if (wagers.containsKey(Outcome.TIE)) {
+                winnings = wagers.get(Outcome.TIE).multiply(Outcome.TIE.getOdds()).setScale(SCALE, ROUNDING_MODE);
+            }
+            clear(); // get all wagers placed back
+        }
+        else if (wagers.containsKey(winningOutcome)) {
+            winnings = wagers.get(winningOutcome).multiply(winningOutcome.getOdds()).setScale(SCALE, ROUNDING_MODE);
+            balance = balance.add(wagers.get(winningOutcome));
+        }
+
+        balance = balance.add(winnings);
+        wagers.clear();
+        return winnings;
+    }
 
 }

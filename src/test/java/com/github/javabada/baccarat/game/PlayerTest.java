@@ -2,6 +2,8 @@ package com.github.javabada.baccarat.game;
 
 import org.junit.Test;
 
+import java.math.BigDecimal;
+
 import static org.junit.Assert.*;
 
 public class PlayerTest {
@@ -62,6 +64,96 @@ public class PlayerTest {
         player.clear();
         assertEquals("0.00", player.checkWager(Outcome.PLAYER).toPlainString());
         assertEquals("1000.00", player.getBalance().toPlainString());
+    }
+
+    @Test
+    public void testSettleWagerOnPlayer() throws Exception {
+        Player player = new Player("1000");
+        BigDecimal winnings;
+
+        player.placeWager(Outcome.PLAYER, "100");
+        winnings = player.settle(Outcome.PLAYER);
+        assertEquals("100.00", winnings.toPlainString());
+        assertEquals("1100.00", player.getBalance().toPlainString());
+
+        player.placeWager(Outcome.PLAYER, "100");
+        winnings = player.settle(Outcome.BANKER);
+        assertEquals("0.00", winnings.toPlainString());
+        assertEquals("1000.00", player.getBalance().toPlainString());
+
+        player.placeWager(Outcome.PLAYER, "100");
+        winnings = player.settle(Outcome.TIE);
+        assertEquals("0.00", winnings.toPlainString());
+        assertEquals("1000.00", player.getBalance().toPlainString());
+    }
+
+    @Test
+    public void testSettleWagerOnBanker() throws Exception {
+        Player player = new Player("1000");
+        BigDecimal winnings;
+
+        player.placeWager(Outcome.BANKER, "100");
+        winnings = player.settle(Outcome.PLAYER);
+        assertEquals("0.00", winnings.toPlainString());
+        assertEquals("900.00", player.getBalance().toPlainString());
+
+        player.placeWager(Outcome.BANKER, "100");
+        winnings = player.settle(Outcome.BANKER);
+        assertEquals("95.00", winnings.toPlainString());
+        assertEquals("995.00", player.getBalance().toPlainString());
+
+        player.placeWager(Outcome.BANKER, "100");
+        winnings = player.settle(Outcome.TIE);
+        assertEquals("0.00", winnings.toPlainString());
+        assertEquals("995.00", player.getBalance().toPlainString());
+    }
+
+    @Test
+    public void testSettleWagerOnTie() throws Exception {
+        Player player = new Player("1000");
+        BigDecimal winnings;
+
+        player.placeWager(Outcome.TIE, "100");
+        winnings = player.settle(Outcome.PLAYER);
+        assertEquals("0.00", winnings.toPlainString());
+        assertEquals("900.00", player.getBalance().toPlainString());
+
+        player.placeWager(Outcome.TIE, "100");
+        winnings = player.settle(Outcome.BANKER);
+        assertEquals("0.00", winnings.toPlainString());
+        assertEquals("800.00", player.getBalance().toPlainString());
+
+        player.placeWager(Outcome.TIE, "100");
+        winnings = player.settle(Outcome.TIE);
+        assertEquals("800.00", winnings.toPlainString());
+        assertEquals("1600.00", player.getBalance().toPlainString());
+    }
+
+    @Test
+    public void testSettleWagerOnAll() throws Exception {
+        Player player = new Player("1000");
+        BigDecimal winnings;
+
+        player.placeWager(Outcome.PLAYER, "100");
+        player.placeWager(Outcome.BANKER, "100");
+        player.placeWager(Outcome.TIE, "100");
+        winnings = player.settle(Outcome.PLAYER);
+        assertEquals("100.00", winnings.toPlainString());
+        assertEquals("900.00", player.getBalance().toPlainString());
+
+        player.placeWager(Outcome.PLAYER, "100");
+        player.placeWager(Outcome.BANKER, "100");
+        player.placeWager(Outcome.TIE, "100");
+        winnings = player.settle(Outcome.BANKER);
+        assertEquals("95.00", winnings.toPlainString());
+        assertEquals("795.00", player.getBalance().toPlainString());
+
+        player.placeWager(Outcome.PLAYER, "100");
+        player.placeWager(Outcome.BANKER, "100");
+        player.placeWager(Outcome.TIE, "100");
+        winnings = player.settle(Outcome.TIE);
+        assertEquals("800.00", winnings.toPlainString());
+        assertEquals("1595.00", player.getBalance().toPlainString());
     }
 
 }
