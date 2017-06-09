@@ -1,18 +1,29 @@
 package com.github.javabada.baccarat.game;
 
 import com.github.javabada.baccarat.card.Card;
+import com.github.javabada.baccarat.card.Shoe;
 
 public class Coup {
 
-    private int cardsDealt = 0;
-    private boolean playerStanding = false;
-    private boolean bankerStanding = false;
+    public enum Hand {
+        PLAYER,
+        BANKER
+    }
 
     private int playerScore = 0;
     private int bankerScore = 0;
-    private boolean playerHand = true;
+    private int cardNumber = 0;
+    private Hand currentHand = Hand.PLAYER;
     private boolean finished = false;
-    private Outcome winningBet;
+    private Outcome winner;
+
+    private final Shoe shoe;
+    private boolean playerStanding = false;
+    private boolean bankerStanding = false;
+
+    public Coup(Shoe shoe) {
+        this.shoe = shoe;
+    }
 
     public int getPlayerScore() {
         return playerScore;
@@ -22,43 +33,49 @@ public class Coup {
         return bankerScore;
     }
 
-    public boolean isPlayerHand() {
-        return playerHand;
+    public int getCardNumber() {
+        return cardNumber;
+    }
+
+    public Hand getCurrentHand() {
+        return currentHand;
     }
 
     public boolean isFinished() {
         return finished;
     }
 
-    public Outcome getWinningBet() {
-        if (!finished) throw new IllegalStateException();
-        return winningBet;
+    public Outcome getWinner() {
+        if (!finished) {
+            throw new IllegalStateException();
+        }
+        return winner;
     }
 
-    public void deal(Card card) {
-        if (finished) throw new IllegalStateException();
+    public Card deal() {
+        if (finished) {
+            throw new IllegalStateException();
+        }
 
-        cardsDealt++;
+        Card card = shoe.draw();
+        cardNumber++;
 
-        switch (cardsDealt) {
+        switch (cardNumber) {
             case 1:
                 playerScore = card.getValue();
-                playerHand = true;
+                currentHand = Hand.PLAYER;
                 break;
-
             case 2:
                 bankerScore = card.getValue();
-                playerHand = false;
+                currentHand = Hand.BANKER;
                 break;
-
             case 3:
                 playerScore = (playerScore + card.getValue()) % 10;
-                playerHand = true;
+                currentHand = Hand.PLAYER;
                 break;
-
             case 4:
                 bankerScore = (bankerScore + card.getValue()) % 10;
-                playerHand = false;
+                currentHand = Hand.BANKER;
                 if (playerScore > 7 || bankerScore > 7) {
                     playerStanding = true;
                     bankerStanding = true;
@@ -72,11 +89,10 @@ public class Coup {
                     }
                 }
                 break;
-
             case 5:
                 if (!playerStanding) {
                     playerScore = (playerScore + card.getValue()) % 10;
-                    playerHand = true;
+                    currentHand = Hand.PLAYER;
                     playerStanding = true;
                     if (((card.getValue() == 2 || card.getValue() == 3) && bankerScore > 4) ||
                         ((card.getValue() == 4 || card.getValue() == 5) && bankerScore > 5) ||
@@ -88,31 +104,31 @@ public class Coup {
                 }
                 else {
                     bankerScore = (bankerScore + card.getValue()) % 10;
-                    playerHand = false;
+                    currentHand = Hand.BANKER;
                     bankerStanding = true;
                 }
                 break;
-
             case 6:
                 bankerScore = (bankerScore + card.getValue()) % 10;
-                playerHand = false;
+                currentHand = Hand.BANKER;
                 bankerStanding = true;
                 break;
         }
 
         if (playerStanding && bankerStanding) {
             finished = true;
-
             if (playerScore > bankerScore) {
-                winningBet = Outcome.PLAYER;
+                winner = Outcome.PLAYER;
             }
             else if (bankerScore > playerScore) {
-                winningBet = Outcome.BANKER;
+                winner = Outcome.BANKER;
             }
             else {
-                winningBet = Outcome.TIE;
+                winner = Outcome.TIE;
             }
         }
+
+        return card;
     }
 
 }

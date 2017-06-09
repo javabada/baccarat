@@ -2,6 +2,7 @@
 
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.image.ImageView?>
 
 <BorderPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
@@ -17,16 +18,26 @@
     </top>
 
     <center>
-        <VBox id="game-center">
-            <Button fx:id="tieButton"    onAction="#handlePlaceWagerButtonAction"/>
-            <Button fx:id="bankerButton" onAction="#handlePlaceWagerButtonAction"/>
-            <Button fx:id="playerButton" onAction="#handlePlaceWagerButtonAction"/>
-        </VBox>
+        <StackPane>
+            <VBox id="game-center">
+                <Button fx:id="tieButton"    onAction="#handlePlaceWagerButtonAction"/>
+                <Button fx:id="bankerButton" onAction="#handlePlaceWagerButtonAction"/>
+                <Button fx:id="playerButton" onAction="#handlePlaceWagerButtonAction"/>
+            </VBox>
+
+            <AnchorPane pickOnBounds="false">
+                <ImageView fx:id="playerCardView1" AnchorPane.leftAnchor="25"  AnchorPane.bottomAnchor="65" fitWidth="150" preserveRatio="true"/>
+                <ImageView fx:id="playerCardView2" AnchorPane.leftAnchor="55"  AnchorPane.bottomAnchor="45" fitWidth="150" preserveRatio="true"/>
+                <ImageView fx:id="playerCardView3" AnchorPane.leftAnchor="85"  AnchorPane.bottomAnchor="25" fitWidth="150" preserveRatio="true"/>
+                <ImageView fx:id="bankerCardView1" AnchorPane.rightAnchor="85" AnchorPane.bottomAnchor="65" fitWidth="150" preserveRatio="true"/>
+                <ImageView fx:id="bankerCardView2" AnchorPane.rightAnchor="55" AnchorPane.bottomAnchor="45" fitWidth="150" preserveRatio="true"/>
+                <ImageView fx:id="bankerCardView3" AnchorPane.rightAnchor="25" AnchorPane.bottomAnchor="25" fitWidth="150" preserveRatio="true"/>
+            </AnchorPane>
+        </StackPane>
     </center>
 
     <bottom>
         <StackPane id="game-bottom">
-
             <GridPane id="game-chips">
                 <fx:define>
                     <ToggleGroup fx:id="chipToggleGroup"/>
@@ -44,15 +55,14 @@
             </VBox>
 
             <HBox id="game-controls-center" pickOnBounds="false">
-                <Button text="Play"/>
-                <Button text="Clear" onAction="#handleClearButtonAction"/>
+                <Button fx:id="actionButton" onAction="#handleActionButtonAction"/>
+                <Button text="Clear" fx:id="clearButton" onAction="#handleClearButtonAction"/>
             </HBox>
 
             <HBox id="game-controls-right" pickOnBounds="false">
                 <Button text="History"/>
-                <Button text="Settings"/>
+                <Button text="About"/>
             </HBox>
-
         </StackPane>
     </bottom>
 

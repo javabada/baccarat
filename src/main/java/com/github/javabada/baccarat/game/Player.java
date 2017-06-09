@@ -20,9 +20,8 @@ public class Player {
         return balance;
     }
 
-    /* Balance is deducted as wagers are placed, calling clear() will undo all placed wagers.
-     * Returns false without any changes if potential wager is greater than balance.
-     */
+    // Balance is deducted as wagers are placed, clear() will undo all placed wagers.
+    // Returns false without any changes if potential wager is greater than balance.
     public boolean placeWager(Outcome outcome, String amount) {
         BigDecimal wagerAmount = new BigDecimal(amount).setScale(SCALE, ROUNDING_MODE);
 
@@ -49,29 +48,31 @@ public class Player {
         return BigDecimal.ZERO.setScale(SCALE);
     }
 
-    public void clear() {
+    public void clearWagers() {
         for (Outcome outcome : wagers.keySet()) {
             balance = balance.add(wagers.get(outcome));
         }
         wagers.clear();
     }
 
-    public BigDecimal settle(Outcome winningOutcome) {
+    public BigDecimal settleWagers(Outcome winner) {
         BigDecimal winnings = BigDecimal.ZERO.setScale(SCALE);
 
-        if (winningOutcome == Outcome.TIE) {
+        if (winner == Outcome.TIE) {
             if (wagers.containsKey(Outcome.TIE)) {
-                winnings = wagers.get(Outcome.TIE).multiply(Outcome.TIE.getOdds()).setScale(SCALE, ROUNDING_MODE);
+                winnings = wagers.get(Outcome.TIE).multiply(Outcome.TIE.getOdds());
             }
-            clear(); // get all wagers placed back
+            for (Outcome outcome : wagers.keySet()) {
+                balance = balance.add(wagers.get(outcome));
+            }
         }
-        else if (wagers.containsKey(winningOutcome)) {
-            winnings = wagers.get(winningOutcome).multiply(winningOutcome.getOdds()).setScale(SCALE, ROUNDING_MODE);
-            balance = balance.add(wagers.get(winningOutcome));
+        else if (wagers.containsKey(winner)) {
+            winnings = wagers.get(winner).multiply(winner.getOdds()).setScale(SCALE, ROUNDING_MODE);
+            balance = balance.add(wagers.get(winner));
         }
 
-        balance = balance.add(winnings);
         wagers.clear();
+        balance = balance.add(winnings);
         return winnings;
     }
 

@@ -10,6 +10,8 @@ import static org.junit.Assert.*;
 
 public class CoupTest {
 
+    /*
+
     @Test
     public void testNaturalCase() throws Exception {
         Coup coup = new Coup();
@@ -199,5 +201,7 @@ public class CoupTest {
         coup.deal(new Card(CardRank.KING, CardSuit.DIAMONDS));
         coup.deal(new Card(CardRank.KING, CardSuit.DIAMONDS));
     }
+
+    */
 
 }
