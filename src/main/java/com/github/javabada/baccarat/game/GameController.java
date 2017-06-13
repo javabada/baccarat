@@ -38,7 +38,7 @@ public class GameController {
     @FXML
     private void initialize() {
         game = new Game();
-        player = new Player("10000");
+        player = new Player();
         coup = new Coup(game.getShoe());
 
         balanceNumberLabel.setText(formatCurrency(player.getBalance()));
@@ -90,21 +90,20 @@ public class GameController {
 
     @FXML
     private void handleActionButtonAction(ActionEvent event) {
-        if (coup == null || coup.isFinished()) {
+        if (coup.isFinished()) {
+            player.settleWagers(coup.getWinner());
+            coup = new Coup(game.getShoe());
+
             messageLabel.setText("");
+            balanceNumberLabel.setText(formatCurrency(player.getBalance()));
             actionButton.setText("Deal");
+            tieButton.setText("Tie");
             tieButton.setDisable(false);
+            bankerButton.setText("Banker");
             bankerButton.setDisable(false);
+            playerButton.setText("Player");
             playerButton.setDisable(false);
             clearCards();
-
-            player.settleWagers(coup.getWinner());
-            balanceNumberLabel.setText(formatCurrency(player.getBalance()));
-            tieButton.setText("Tie");
-            bankerButton.setText("Banker");
-            playerButton.setText("Player");
-
-            coup = new Coup(game.getShoe());
         }
         else {
             clearButton.setDisable(true);
@@ -117,7 +116,6 @@ public class GameController {
 
             if (coup.isFinished()) {
                 actionButton.setText("Continue");
-
                 if (coup.getWinner() == Outcome.PLAYER) {
                     messageLabel.setText("Player wins");
                 }

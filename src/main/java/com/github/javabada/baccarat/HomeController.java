@@ -24,7 +24,7 @@ public class HomeController {
     @FXML
     private void handleHyperlinkAction(ActionEvent event) throws IOException, URISyntaxException {
         if (Desktop.isDesktopSupported()) {
-            Desktop.getDesktop().browse( new URI("https://github.com/javabada/baccarat") );
+            Desktop.getDesktop().browse(new URI("https://github.com/javabada/baccarat"));
         }
     }
 

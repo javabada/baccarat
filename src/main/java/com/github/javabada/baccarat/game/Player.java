@@ -6,6 +6,8 @@ import java.util.Map;
 
 public class Player {
 
+    private static final String STARTING_BALANCE = "10000";
+
     private static final int SCALE = 2;
     private static final int ROUNDING_MODE = BigDecimal.ROUND_HALF_UP;
 
@@ -14,6 +16,10 @@ public class Player {
 
     public Player(String amount) {
         balance = new BigDecimal(amount).setScale(SCALE, ROUNDING_MODE);
+    }
+
+    public Player() {
+        this(STARTING_BALANCE);
     }
 
     public BigDecimal getBalance() {
