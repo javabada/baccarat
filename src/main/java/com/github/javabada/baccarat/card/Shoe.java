@@ -6,29 +6,39 @@ import java.util.List;
 
 public class Shoe {
 
-    private final List<Card> shoe = new ArrayList<>();
+  private final List<Card> shoe = new ArrayList<>();
 
-    public Shoe(int decks) {
-        fill(decks);
-    }
+  public Shoe() {}
 
-    public int cardsRemaining() {
-        return shoe.size();
-    }
-
-    public Card draw() {
-        return shoe.remove(0);
-    }
-
-    private void fill(int decks) {
-        for (int i = 0; i < decks; i++) {
-            for (CardRank rank : CardRank.values()) {
-                for (CardSuit suit : CardSuit.values()) {
-                    shoe.add(new Card(rank, suit));
-                }
-            }
+  public void fill(int decks) {
+    for (int i = 0; i < decks; i++) {
+      for (CardRank r : CardRank.values()) {
+        for (CardSuit s : CardSuit.values()) {
+          shoe.add(new Card(r, s));
         }
-        Collections.shuffle(shoe);
+      }
     }
+  }
+
+  public void shuffle() {
+    Collections.shuffle(shoe);
+  }
+
+  public Card draw() {
+    return shoe.remove(0);
+  }
+
+  public int cardsRemaining() {
+    return shoe.size();
+  }
+
+  public void clear() {
+    shoe.clear();
+  }
+
+  // only use when constructing non-random shoes for testing purposes
+  public void add (Card card) {
+    shoe.add(card);
+  }
 
 }
