@@ -37,7 +37,7 @@ public class Shoe {
   }
 
   // only use when constructing non-random shoes for testing purposes
-  public void add (Card card) {
+  public void add(Card card) {
     shoe.add(card);
   }
 
