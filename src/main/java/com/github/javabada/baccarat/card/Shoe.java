@@ -12,8 +12,8 @@ public class Shoe {
 
   public void fill(int decks) {
     for (int i = 0; i < decks; i++) {
-      for (CardRank r : CardRank.values()) {
-        for (CardSuit s : CardSuit.values()) {
+      for (Rank r : Rank.values()) {
+        for (Suit s : Suit.values()) {
           shoe.add(new Card(r, s));
         }
       }

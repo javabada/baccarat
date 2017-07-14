@@ -2,10 +2,10 @@ package com.github.javabada.baccarat.card;
 
 public class Card {
 
-  private final CardRank rank;
-  private final CardSuit suit;
+  private final Rank rank;
+  private final Suit suit;
 
-  public Card(CardRank rank, CardSuit suit) {
+  public Card(Rank rank, Suit suit) {
     this.rank = rank;
     this.suit = suit;
   }
