@@ -9,18 +9,18 @@
             prefHeight="600.0" prefWidth="800.0"
             stylesheets="/Casino.css">
 
-    <center>
-        <VBox id="home-center">
-            <Label text="Welcome to Baccarat" id="home-title"/>
-            <Button text="Start" fx:id="startButton" onAction="#handleStartButtonAction"/>
-        </VBox>
-    </center>
+  <center>
+    <VBox id="home-center">
+      <Label text="Welcome to Baccarat" id="home-title"/>
+      <Button text="Start" fx:id="startButton" onAction="#handleStartButtonAction"/>
+    </VBox>
+  </center>
 
-    <bottom>
-        <VBox id="home-bottom">
-            <Label text="Created by Jeffrey Zhang"/>
-            <Hyperlink text="Source Code on GitHub" onAction="#handleHyperlinkAction"/>
-        </VBox>
-    </bottom>
+  <bottom>
+    <VBox id="home-bottom">
+      <Label text="Created by Jeffrey Zhang"/>
+      <Hyperlink text="Source Code on GitHub" onAction="#handleHyperlinkAction"/>
+    </VBox>
+  </bottom>
 
 </BorderPane>

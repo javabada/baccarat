@@ -8,19 +8,19 @@ import javafx.stage.Stage;
 
 public class Baccarat extends Application {
 
-    public static void main(String[] args) {
-        launch(args);
-    }
+  public static void main(String[] args) {
+    launch(args);
+  }
 
-    @Override
-    public void start(Stage primaryStage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("/fxml/Home.fxml"));
+  @Override
+  public void start(Stage primaryStage) throws Exception {
+    Parent root = FXMLLoader.load(getClass().getResource("/fxml/Home.fxml"));
 
-        Scene scene = new Scene(root);
+    Scene scene = new Scene(root);
 
-        primaryStage.setTitle("Baccarat");
-        primaryStage.setScene(scene);
-        primaryStage.show();
-    }
+    primaryStage.setTitle("Baccarat");
+    primaryStage.setScene(scene);
+    primaryStage.show();
+  }
 
 }

@@ -10,60 +10,60 @@
             prefHeight="600.0" prefWidth="800.0"
             stylesheets="/Casino.css">
 
-    <top>
-        <HBox id="game-top">
-            <Label text="Balance: " styleClass="game-label"/>
-            <Label fx:id="balanceNumberLabel" styleClass="game-label"/>
-        </HBox>
-    </top>
+  <top>
+    <HBox id="game-top">
+      <Label text="Balance: " styleClass="game-label"/>
+      <Label fx:id="balanceNumberLabel" styleClass="game-label"/>
+    </HBox>
+  </top>
 
-    <center>
-        <StackPane>
-            <VBox id="game-center">
-                <Button fx:id="tieButton"    onAction="#handlePlaceWagerButtonAction"/>
-                <Button fx:id="bankerButton" onAction="#handlePlaceWagerButtonAction"/>
-                <Button fx:id="playerButton" onAction="#handlePlaceWagerButtonAction"/>
-            </VBox>
+  <center>
+    <StackPane>
+      <VBox id="game-center">
+        <Button fx:id="tieButton"    onAction="#handlePlaceWagerButtonAction"/>
+        <Button fx:id="bankerButton" onAction="#handlePlaceWagerButtonAction"/>
+        <Button fx:id="playerButton" onAction="#handlePlaceWagerButtonAction"/>
+      </VBox>
 
-            <AnchorPane pickOnBounds="false">
-                <ImageView fx:id="playerCardView1" AnchorPane.leftAnchor="25"  AnchorPane.bottomAnchor="65" fitWidth="150" preserveRatio="true"/>
-                <ImageView fx:id="playerCardView2" AnchorPane.leftAnchor="55"  AnchorPane.bottomAnchor="45" fitWidth="150" preserveRatio="true"/>
-                <ImageView fx:id="playerCardView3" AnchorPane.leftAnchor="85"  AnchorPane.bottomAnchor="25" fitWidth="150" preserveRatio="true"/>
-                <ImageView fx:id="bankerCardView1" AnchorPane.rightAnchor="85" AnchorPane.bottomAnchor="65" fitWidth="150" preserveRatio="true"/>
-                <ImageView fx:id="bankerCardView2" AnchorPane.rightAnchor="55" AnchorPane.bottomAnchor="45" fitWidth="150" preserveRatio="true"/>
-                <ImageView fx:id="bankerCardView3" AnchorPane.rightAnchor="25" AnchorPane.bottomAnchor="25" fitWidth="150" preserveRatio="true"/>
-            </AnchorPane>
-        </StackPane>
-    </center>
+      <AnchorPane pickOnBounds="false">
+        <ImageView fx:id="playerCardView1" AnchorPane.leftAnchor="25"  AnchorPane.bottomAnchor="65" fitWidth="150" preserveRatio="true"/>
+        <ImageView fx:id="playerCardView2" AnchorPane.leftAnchor="55"  AnchorPane.bottomAnchor="45" fitWidth="150" preserveRatio="true"/>
+        <ImageView fx:id="playerCardView3" AnchorPane.leftAnchor="85"  AnchorPane.bottomAnchor="25" fitWidth="150" preserveRatio="true"/>
+        <ImageView fx:id="bankerCardView1" AnchorPane.rightAnchor="85" AnchorPane.bottomAnchor="65" fitWidth="150" preserveRatio="true"/>
+        <ImageView fx:id="bankerCardView2" AnchorPane.rightAnchor="55" AnchorPane.bottomAnchor="45" fitWidth="150" preserveRatio="true"/>
+        <ImageView fx:id="bankerCardView3" AnchorPane.rightAnchor="25" AnchorPane.bottomAnchor="25" fitWidth="150" preserveRatio="true"/>
+      </AnchorPane>
+    </StackPane>
+  </center>
 
-    <bottom>
-        <StackPane id="game-bottom">
-            <GridPane id="game-chips">
-                <fx:define>
-                    <ToggleGroup fx:id="chipToggleGroup"/>
-                </fx:define>
-                <ToggleButton text="\$5"    userData="5"    GridPane.rowIndex="0" GridPane.columnIndex="0" toggleGroup="$chipToggleGroup"/>
-                <ToggleButton text="\$10"   userData="10"   GridPane.rowIndex="0" GridPane.columnIndex="1" toggleGroup="$chipToggleGroup"/>
-                <ToggleButton text="\$25"   userData="25"   GridPane.rowIndex="0" GridPane.columnIndex="2" toggleGroup="$chipToggleGroup"/>
-                <ToggleButton text="\$100"  userData="100"  GridPane.rowIndex="1" GridPane.columnIndex="0" toggleGroup="$chipToggleGroup"/>
-                <ToggleButton text="\$500"  userData="500"  GridPane.rowIndex="1" GridPane.columnIndex="1" toggleGroup="$chipToggleGroup"/>
-                <ToggleButton text="\$1000" userData="1000" GridPane.rowIndex="1" GridPane.columnIndex="2" toggleGroup="$chipToggleGroup"/>
-            </GridPane>
+  <bottom>
+    <StackPane id="game-bottom">
+      <GridPane id="game-chips">
+        <fx:define>
+          <ToggleGroup fx:id="chipToggleGroup"/>
+        </fx:define>
+        <ToggleButton text="\$5"    userData="5"    GridPane.rowIndex="0" GridPane.columnIndex="0" toggleGroup="$chipToggleGroup"/>
+        <ToggleButton text="\$10"   userData="10"   GridPane.rowIndex="0" GridPane.columnIndex="1" toggleGroup="$chipToggleGroup"/>
+        <ToggleButton text="\$25"   userData="25"   GridPane.rowIndex="0" GridPane.columnIndex="2" toggleGroup="$chipToggleGroup"/>
+        <ToggleButton text="\$100"  userData="100"  GridPane.rowIndex="1" GridPane.columnIndex="0" toggleGroup="$chipToggleGroup"/>
+        <ToggleButton text="\$500"  userData="500"  GridPane.rowIndex="1" GridPane.columnIndex="1" toggleGroup="$chipToggleGroup"/>
+        <ToggleButton text="\$1000" userData="1000" GridPane.rowIndex="1" GridPane.columnIndex="2" toggleGroup="$chipToggleGroup"/>
+      </GridPane>
 
-            <VBox id="game-message" pickOnBounds="false">
-                <Label fx:id="messageLabel" styleClass="game-label"/>
-            </VBox>
+      <VBox id="game-message" pickOnBounds="false">
+        <Label fx:id="messageLabel" styleClass="game-label"/>
+      </VBox>
 
-            <HBox id="game-controls-center" pickOnBounds="false">
-                <Button fx:id="actionButton" onAction="#handleActionButtonAction"/>
-                <Button text="Clear" fx:id="clearButton" onAction="#handleClearButtonAction"/>
-            </HBox>
+      <HBox id="game-controls-center" pickOnBounds="false">
+        <Button fx:id="actionButton" onAction="#handleActionButtonAction"/>
+        <Button text="Clear" fx:id="clearButton" onAction="#handleClearButtonAction"/>
+      </HBox>
 
-            <HBox id="game-controls-right" pickOnBounds="false">
-                <Button text="History"/>
-                <Button text="About"/>
-            </HBox>
-        </StackPane>
-    </bottom>
+      <HBox id="game-controls-right" pickOnBounds="false">
+        <Button text="History"/>
+        <Button text="About"/>
+      </HBox>
+    </StackPane>
+  </bottom>
 
 </BorderPane>
