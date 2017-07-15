@@ -16,22 +16,6 @@
   -fx-background-radius: 50%;
 }
 
-/* Home screen */
-#home-center {
-  -fx-alignment: center;
-  -fx-spacing: 25px;
-}
-
-#home-title {
-  -fx-font-size: 36px;
-  -fx-font-weight: bold;
-}
-
-#home-bottom {
-  -fx-alignment: bottom-right;
-  -fx-padding: 0px 10px 10px 0px;
-}
-
 /* Game screen */
 .game-label {
   -fx-font-size: 14px;
