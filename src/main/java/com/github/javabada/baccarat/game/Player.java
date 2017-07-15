@@ -6,8 +6,6 @@ import java.util.Map;
 
 public class Player {
 
-  private static final String STARTING_BALANCE = "10000";
-
   private static final int SCALE = 2;
   private static final int ROUNDING_MODE = BigDecimal.ROUND_HALF_UP;
 
@@ -18,16 +16,12 @@ public class Player {
     balance = new BigDecimal(amount).setScale(SCALE, ROUNDING_MODE);
   }
 
-  public Player() {
-    this(STARTING_BALANCE);
-  }
-
   public BigDecimal getBalance() {
     return balance;
   }
 
-  // Balance is deducted as wagers are placed, clear() will undo all placed wagers.
-  // Returns false without any changes if potential wager is greater than balance.
+  // balance is deducted as wagers are placed, clear() will undo all placed wagers
+  // returns false without any changes if potential wager is greater than balance
   public boolean placeWager(Outcome outcome, String amount) {
     BigDecimal wagerAmount = new BigDecimal(amount).setScale(SCALE, ROUNDING_MODE);
 
@@ -38,8 +32,7 @@ public class Player {
     if (wagers.containsKey(outcome)) {
       BigDecimal totalAmount = wagers.get(outcome).add(wagerAmount);
       wagers.put(outcome, totalAmount);
-    }
-    else {
+    } else {
       wagers.put(outcome, wagerAmount);
     }
 
@@ -55,8 +48,8 @@ public class Player {
   }
 
   public void clearWagers() {
-    for (Outcome outcome : wagers.keySet()) {
-      balance = balance.add(wagers.get(outcome));
+    for (Outcome o : wagers.keySet()) {
+      balance = balance.add(wagers.get(o));
     }
     wagers.clear();
   }
@@ -68,11 +61,10 @@ public class Player {
       if (wagers.containsKey(Outcome.TIE)) {
         winnings = wagers.get(Outcome.TIE).multiply(Outcome.TIE.getOdds());
       }
-      for (Outcome outcome : wagers.keySet()) {
-        balance = balance.add(wagers.get(outcome));
+      for (Outcome o : wagers.keySet()) {
+        balance = balance.add(wagers.get(o));
       }
-    }
-    else if (wagers.containsKey(winner)) {
+    } else if (wagers.containsKey(winner)) {
       winnings = wagers.get(winner).multiply(winner.getOdds()).setScale(SCALE, ROUNDING_MODE);
       balance = balance.add(wagers.get(winner));
     }

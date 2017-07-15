@@ -5,7 +5,7 @@ import java.math.BigDecimal;
 public enum Outcome {
 
   PLAYER ("1"),
-  BANKER ("0.95"),
+  BANKER (".95"),
   TIE    ("8");
 
   private final BigDecimal odds;
