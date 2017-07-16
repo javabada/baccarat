@@ -1,6 +1,6 @@
-package com.github.javabada.baccarat.game;
+package io.github.javabada.baccarat.game;
 
-import com.github.javabada.baccarat.card.Card;
+import io.github.javabada.baccarat.card.Card;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -15,7 +15,7 @@ import java.util.Locale;
 
 public class GameController {
 
-  private Game game;
+  /*
   private Player player;
   private Coup coup;
 
@@ -37,7 +37,6 @@ public class GameController {
 
   @FXML
   private void initialize() {
-    game = new Game();
     player = new Player();
     coup = new Coup(game.getShoe());
 
@@ -183,5 +182,6 @@ public class GameController {
     bankerCardView2.setImage(null);
     bankerCardView3.setImage(null);
   }
+  */
 
 }

@@ -1,4 +1,4 @@
-package com.github.javabada.baccarat.game;
+package io.github.javabada.baccarat.game;
 
 import java.math.BigDecimal;
 

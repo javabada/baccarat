@@ -1,4 +1,4 @@
-package com.github.javabada.baccarat;
+package io.github.javabada.baccarat;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;

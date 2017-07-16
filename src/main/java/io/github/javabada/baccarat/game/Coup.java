@@ -1,7 +1,7 @@
-package com.github.javabada.baccarat.game;
+package io.github.javabada.baccarat.game;
 
-import com.github.javabada.baccarat.card.Card;
-import com.github.javabada.baccarat.card.Shoe;
+import io.github.javabada.baccarat.card.Card;
+import io.github.javabada.baccarat.card.Shoe;
 import java.util.ArrayList;
 import java.util.List;
 

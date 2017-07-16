@@ -1,4 +1,4 @@
-group 'com.github.javabada.baccarat'
+group 'io.github.javabada.baccarat'
 version '1.0-SNAPSHOT'
 
 apply plugin: 'java'
@@ -6,9 +6,9 @@ apply plugin: 'java'
 sourceCompatibility = 1.8
 
 repositories {
-    mavenCentral()
+  mavenCentral()
 }
 
 dependencies {
-    testCompile group: 'junit', name: 'junit', version: '4.12'
+  testCompile group: 'junit', name: 'junit', version: '4.12'
 }

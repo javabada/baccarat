@@ -1,4 +1,4 @@
-package com.github.javabada.baccarat.card;
+package io.github.javabada.baccarat.card;
 
 public enum Rank {
 
