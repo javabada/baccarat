@@ -1,19 +1,43 @@
 package io.github.javabada.baccarat.game;
 
-import io.github.javabada.baccarat.card.Card;
-
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.ToggleGroup;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-
 import java.text.NumberFormat;
 import java.util.Locale;
 
 public class GameController {
+
+  private Player player = new Player("10000");
+
+  @FXML private Label balanceLabel;
+  @FXML private Label messageLabel;
+  @FXML private Button actionButton;
+  @FXML private Button tieButton;
+  @FXML private Button playerButton;
+  @FXML private Button bankerButton;
+  @FXML private ImageView playerCard1;
+  @FXML private ImageView playerCard2;
+  @FXML private ImageView playerCard3;
+  @FXML private ImageView bankerCard1;
+  @FXML private ImageView bankerCard2;
+  @FXML private ImageView bankerCard3;
+
+  @FXML
+  private void initialize() {
+    balanceLabel.setText(formatCurrency(player.getBalance()));
+    actionButton.setText("Play");
+    tieButton.setText("Tie");
+    playerButton.setText("Player");
+    bankerButton.setText("Banker");
+  }
+
+  private String formatCurrency(Object o) {
+    return NumberFormat.getCurrencyInstance(Locale.US).format(o);
+  }
+
+}
 
   /*
   private Player player;
@@ -183,5 +207,3 @@ public class GameController {
     bankerCardView3.setImage(null);
   }
   */
-
-}

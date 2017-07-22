@@ -13,12 +13,12 @@ public class Baccarat extends Application {
   }
 
   @Override
-  public void start(Stage primaryStage) throws Exception {
+  public void start(Stage stage) throws Exception {
     Parent root = FXMLLoader.load(getClass().getResource("/fxml/game.fxml"));
     Scene scene = new Scene(root);
-    primaryStage.setScene(scene);
-    primaryStage.setTitle("Baccarat");
-    primaryStage.show();
+    stage.setScene(scene);
+    stage.setTitle("Baccarat");
+    stage.show();
   }
 
 }
