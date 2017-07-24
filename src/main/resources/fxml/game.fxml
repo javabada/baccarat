@@ -26,15 +26,15 @@
   <center>
     <StackPane>
       <VBox styleClass="game-layout-wagers">
-        <Button fx:id="tieButton"/>
-        <Button fx:id="bankerButton"/>
-        <Button fx:id="playerButton"/>
+        <Button fx:id="tieButton" onAction="#placeWagerAction" userData="Tie"/>
+        <Button fx:id="bankerButton" onAction="#placeWagerAction" userData="Banker"/>
+        <Button fx:id="playerButton" onAction="#placeWagerAction" userData="Player"/>
       </VBox>
 
       <AnchorPane pickOnBounds="false">
-        <ImageView fx:id="playerCard1" AnchorPane.bottomAnchor="65" AnchorPane.leftAnchor="25"  fitWidth="150" preserveRatio="true"/>
-        <ImageView fx:id="playerCard2" AnchorPane.bottomAnchor="45" AnchorPane.leftAnchor="55"  fitWidth="150" preserveRatio="true"/>
-        <ImageView fx:id="playerCard3" AnchorPane.bottomAnchor="25" AnchorPane.leftAnchor="85"  fitWidth="150" preserveRatio="true"/>
+        <ImageView fx:id="playerCard1" AnchorPane.bottomAnchor="65" AnchorPane.leftAnchor="25" fitWidth="150" preserveRatio="true"/>
+        <ImageView fx:id="playerCard2" AnchorPane.bottomAnchor="45" AnchorPane.leftAnchor="55" fitWidth="150" preserveRatio="true"/>
+        <ImageView fx:id="playerCard3" AnchorPane.bottomAnchor="25" AnchorPane.leftAnchor="85" fitWidth="150" preserveRatio="true"/>
         <ImageView fx:id="bankerCard1" AnchorPane.bottomAnchor="65" AnchorPane.rightAnchor="85" fitWidth="150" preserveRatio="true"/>
         <ImageView fx:id="bankerCard2" AnchorPane.bottomAnchor="45" AnchorPane.rightAnchor="55" fitWidth="150" preserveRatio="true"/>
         <ImageView fx:id="bankerCard3" AnchorPane.bottomAnchor="25" AnchorPane.rightAnchor="25" fitWidth="150" preserveRatio="true"/>
@@ -46,28 +46,29 @@
     <StackPane>
       <GridPane styleClass="game-layout-chips">
         <fx:define>
-          <ToggleGroup fx:id="chipsGroup"/>
+          <ToggleGroup fx:id="chipsToggleGroup"/>
         </fx:define>
-        <ToggleButton toggleGroup="$chipsGroup" GridPane.rowIndex="0" GridPane.columnIndex="0" text="\$5"    userData="5"/>
-        <ToggleButton toggleGroup="$chipsGroup" GridPane.rowIndex="0" GridPane.columnIndex="1" text="\$10"   userData="10"/>
-        <ToggleButton toggleGroup="$chipsGroup" GridPane.rowIndex="0" GridPane.columnIndex="2" text="\$25"   userData="25"/>
-        <ToggleButton toggleGroup="$chipsGroup" GridPane.rowIndex="1" GridPane.columnIndex="0" text="\$100"  userData="100"/>
-        <ToggleButton toggleGroup="$chipsGroup" GridPane.rowIndex="1" GridPane.columnIndex="1" text="\$500"  userData="500"/>
-        <ToggleButton toggleGroup="$chipsGroup" GridPane.rowIndex="1" GridPane.columnIndex="2" text="\$1000" userData="1000"/>
+        <ToggleButton toggleGroup="$chipsToggleGroup" GridPane.rowIndex="0" GridPane.columnIndex="0" text="\$5" userData="5"/>
+        <ToggleButton toggleGroup="$chipsToggleGroup" GridPane.rowIndex="0" GridPane.columnIndex="1" text="\$10" userData="10"/>
+        <ToggleButton toggleGroup="$chipsToggleGroup" GridPane.rowIndex="0" GridPane.columnIndex="2" text="\$25" userData="25"/>
+        <ToggleButton toggleGroup="$chipsToggleGroup" GridPane.rowIndex="1" GridPane.columnIndex="0" text="\$100" userData="100"/>
+        <ToggleButton toggleGroup="$chipsToggleGroup" GridPane.rowIndex="1" GridPane.columnIndex="1" text="\$500" userData="500"/>
+        <ToggleButton toggleGroup="$chipsToggleGroup" GridPane.rowIndex="1" GridPane.columnIndex="2" text="\$1000" userData="1000"/>
       </GridPane>
 
-      <HBox pickOnBounds="false" styleClass="game-layout-message">
+      <HBox styleClass="game-layout-message" pickOnBounds="false">
         <Label fx:id="messageLabel"/>
       </HBox>
 
-      <HBox pickOnBounds="false" styleClass="game-layout-controls">
-        <Button fx:id="actionButton"/>
-        <Button text="Clear"/>
+      <HBox styleClass="game-layout-controls" pickOnBounds="false">
+        <Button fx:id="playButton"/>
+        <Button fx:id="clearButton" onAction="#clearAction" text="Clear"/>
       </HBox>
 
-      <HBox pickOnBounds="false" styleClass="game-layout-info">
-        <Button text="Scoreboard"/>
-        <Button text="About"/>
+      <HBox styleClass="game-layout-info" pickOnBounds="false">
+        <!-- TODO -->
+        <Button text="Scoreboard" disable="true"/>
+        <Button text="About" disable="true"/>
       </HBox>
     </StackPane>
   </bottom>

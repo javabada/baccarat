@@ -8,12 +8,14 @@
 .button {
   -fx-pref-height: 65px;
   -fx-pref-width: 100px;
+  -fx-text-alignment: center;
 }
 
 .toggle-button {
   -fx-pref-height: 65px;
   -fx-pref-width: 65px;
   -fx-background-radius: 50%;
+  -fx-text-alignment: center;
 }
 
 /* custom layout classes */
