@@ -2,8 +2,6 @@ package io.github.javabada.baccarat.game;
 
 import io.github.javabada.baccarat.card.Card;
 import io.github.javabada.baccarat.card.Shoe;
-import java.util.ArrayList;
-import java.util.List;
 
 public class Coup {
 
@@ -54,24 +52,28 @@ public class Coup {
     }
   }
 
-  public List<Card> getPlayerHand() {
-    List<Card> playerHand = new ArrayList<>();
-    playerHand.add(playerCard1);
-    playerHand.add(playerCard2);
-    if (playerCard3 != null) {
-      playerHand.add(playerCard3);
-    }
-    return playerHand;
+  public Card getPlayerCard1() {
+    return playerCard1;
   }
 
-  public List<Card> getBankerHand() {
-    List<Card> bankerHand = new ArrayList<>();
-    bankerHand.add(bankerCard1);
-    bankerHand.add(bankerCard2);
-    if (bankerCard3 != null) {
-      bankerHand.add(bankerCard3);
-    }
-    return bankerHand;
+  public Card getPlayerCard2() {
+    return playerCard2;
+  }
+
+  public Card getPlayerCard3() {
+    return playerCard3;
+  }
+
+  public Card getBankerCard1() {
+    return bankerCard1;
+  }
+
+  public Card getBankerCard2() {
+    return bankerCard2;
+  }
+
+  public Card getBankerCard3() {
+    return bankerCard3;
   }
 
   public int getPlayerScore() {
