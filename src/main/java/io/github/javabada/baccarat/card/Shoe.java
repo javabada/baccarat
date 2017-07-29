@@ -7,10 +7,13 @@ import java.util.List;
 public class Shoe {
 
   private final List<Card> shoe = new ArrayList<>();
+  private final int decks;
 
-  public Shoe() {}
+  public Shoe(int decks) {
+    this.decks = decks;
+  }
 
-  public void fill(int decks) {
+  public void prepare() {
     for (int i = 0; i < decks; i++) {
       for (Rank r : Rank.values()) {
         for (Suit s : Suit.values()) {
@@ -18,9 +21,6 @@ public class Shoe {
         }
       }
     }
-  }
-
-  public void shuffle() {
     Collections.shuffle(shoe);
   }
 
@@ -28,12 +28,13 @@ public class Shoe {
     return shoe.remove(0);
   }
 
-  public int cardsRemaining() {
-    return shoe.size();
-  }
-
-  public void clear() {
-    shoe.clear();
+  // the cut card is placed 16 cards from the bottom, appearance of the cut card
+  // indicates that the next coup is the final coup of the shoe
+  public boolean cutCardDrawn() {
+    if (shoe.size() < 17) {
+      return true;
+    }
+    return false;
   }
 
   // only use when constructing non-random shoes for testing purposes
