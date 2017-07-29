@@ -28,13 +28,8 @@ public class Shoe {
     return shoe.remove(0);
   }
 
-  // the cut card is placed 16 cards from the bottom, appearance of the cut card
-  // indicates that the next coup is the final coup of the shoe
-  public boolean cutCardDrawn() {
-    if (shoe.size() < 17) {
-      return true;
-    }
-    return false;
+  public int cardsRemaining() {
+    return shoe.size();
   }
 
   // only use when constructing non-random shoes for testing purposes
