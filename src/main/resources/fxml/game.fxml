@@ -32,12 +32,14 @@
       </VBox>
 
       <AnchorPane pickOnBounds="false">
-        <ImageView fx:id="playerCardImageView1" AnchorPane.bottomAnchor="65" AnchorPane.leftAnchor="25" fitWidth="150" preserveRatio="true"/>
-        <ImageView fx:id="playerCardImageView2" AnchorPane.bottomAnchor="45" AnchorPane.leftAnchor="55" fitWidth="150" preserveRatio="true"/>
-        <ImageView fx:id="playerCardImageView3" AnchorPane.bottomAnchor="25" AnchorPane.leftAnchor="85" fitWidth="150" preserveRatio="true"/>
-        <ImageView fx:id="bankerCardImageView1" AnchorPane.bottomAnchor="65" AnchorPane.rightAnchor="85" fitWidth="150" preserveRatio="true"/>
-        <ImageView fx:id="bankerCardImageView2" AnchorPane.bottomAnchor="45" AnchorPane.rightAnchor="55" fitWidth="150" preserveRatio="true"/>
-        <ImageView fx:id="bankerCardImageView3" AnchorPane.bottomAnchor="25" AnchorPane.rightAnchor="25" fitWidth="150" preserveRatio="true"/>
+        <ImageView fx:id="playerCardImageView1" AnchorPane.bottomAnchor="100" AnchorPane.leftAnchor="0" fitWidth="150" preserveRatio="true"/>
+        <ImageView fx:id="playerCardImageView2" AnchorPane.bottomAnchor="80" AnchorPane.leftAnchor="30" fitWidth="150" preserveRatio="true"/>
+        <ImageView fx:id="playerCardImageView3" AnchorPane.bottomAnchor="60" AnchorPane.leftAnchor="60" fitWidth="150" preserveRatio="true"/>
+        <ImageView fx:id="bankerCardImageView1" AnchorPane.bottomAnchor="100" AnchorPane.rightAnchor="60" fitWidth="150" preserveRatio="true"/>
+        <ImageView fx:id="bankerCardImageView2" AnchorPane.bottomAnchor="80" AnchorPane.rightAnchor="30" fitWidth="150" preserveRatio="true"/>
+        <ImageView fx:id="bankerCardImageView3" AnchorPane.bottomAnchor="60" AnchorPane.rightAnchor="0" fitWidth="150" preserveRatio="true"/>
+        <Label fx:id="playerScoreLabel" AnchorPane.bottomAnchor="20" AnchorPane.leftAnchor="60"/>
+        <Label fx:id="bankerScoreLabel" AnchorPane.bottomAnchor="20" AnchorPane.rightAnchor="60"/>
       </AnchorPane>
     </StackPane>
   </center>

@@ -20,6 +20,8 @@ public class GameController {
 
   @FXML private Label balanceLabel;
   @FXML private Label messageLabel;
+  @FXML private Label playerScoreLabel;
+  @FXML private Label bankerScoreLabel;
   @FXML private Button tieButton;
   @FXML private Button bankerButton;
   @FXML private Button playerButton;
@@ -97,6 +99,8 @@ public class GameController {
       } else {
         messageLabel.setText("Player wins");
       }
+      playerScoreLabel.setText("Player score: " + currentCoup.getPlayerScore());
+      bankerScoreLabel.setText("Banker score: " + currentCoup.getBankerScore());
       tieButton.setDisable(true);
       bankerButton.setDisable(true);
       playerButton.setDisable(true);
@@ -110,6 +114,8 @@ public class GameController {
 
       balanceLabel.setText(formatCurrency(player.getBalance()));
       messageLabel.setText("");
+      playerScoreLabel.setText("");
+      bankerScoreLabel.setText("");
       tieButton.setText("Tie");
       tieButton.setDisable(false);
       bankerButton.setText("Banker");
