@@ -1,10 +1,12 @@
 package io.github.javabada.baccarat.game;
 
+import io.github.javabada.baccarat.card.Card;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import java.text.NumberFormat;
 import java.util.Locale;
@@ -12,6 +14,9 @@ import java.util.Locale;
 public class GameController {
 
   private Player player;
+  private Game game;
+  private Coup currentCoup;
+  private boolean coupPlayed;
 
   @FXML private Label balanceLabel;
   @FXML private Label messageLabel;
@@ -21,27 +26,30 @@ public class GameController {
   @FXML private Button playButton;
   @FXML private Button clearButton;
   @FXML private ToggleGroup chipsToggleGroup;
-  @FXML private ImageView playerCard1;
-  @FXML private ImageView playerCard2;
-  @FXML private ImageView playerCard3;
-  @FXML private ImageView bankerCard1;
-  @FXML private ImageView bankerCard2;
-  @FXML private ImageView bankerCard3;
+  @FXML private ImageView playerCardImageView1;
+  @FXML private ImageView playerCardImageView2;
+  @FXML private ImageView playerCardImageView3;
+  @FXML private ImageView bankerCardImageView1;
+  @FXML private ImageView bankerCardImageView2;
+  @FXML private ImageView bankerCardImageView3;
 
   @FXML
   private void initialize() {
     player = new Player("10000");
+    game = new Game();
+    game.newShoe(8);
+    coupPlayed = false;
 
     balanceLabel.setText(formatCurrency(player.getBalance()));
-    tieButton.setText(tieButton.getUserData().toString());
-    bankerButton.setText(bankerButton.getUserData().toString());
-    playerButton.setText(playerButton.getUserData().toString());
+    tieButton.setText("Tie");
+    bankerButton.setText("Banker");
+    playerButton.setText("Player");
     playButton.setText("Play");
     clearButton.setDisable(true);
   }
 
   @FXML
-  private void placeWagerAction(ActionEvent event) {
+  private void onPlaceWagerAction(ActionEvent event) {
     if (chipsToggleGroup.getSelectedToggle() == null) {
       messageLabel.setText("Please select a chip");
       return;
@@ -72,122 +80,88 @@ public class GameController {
           formatCurrency(player.checkWager(wagerOutcome)));
       clearButton.setDisable(false);
     } else {
-      messageLabel.setText("Insufficient balance");
+      messageLabel.setText("Insufficient funds");
     }
   }
 
   @FXML
-  private void clearAction() {
-    player.clearWagers();
+  private void onPlayButtonAction() {
+    if (!coupPlayed) {
+      currentCoup = game.playNewCoup();
+      coupPlayed = true;
 
-    balanceLabel.setText(formatCurrency(player.getBalance()));
-    messageLabel.setText("");
-    tieButton.setText(tieButton.getUserData().toString());
-    bankerButton.setText(bankerButton.getUserData().toString());
-    playerButton.setText(playerButton.getUserData().toString());
-    clearButton.setDisable(true);
-  }
+      if (currentCoup.getOutcome() == Outcome.TIE) {
+        messageLabel.setText("Tie");
+      } else if (currentCoup.getOutcome() == Outcome.BANKER) {
+        messageLabel.setText("Banker wins");
+      } else {
+        messageLabel.setText("Player wins");
+      }
+      tieButton.setDisable(true);
+      bankerButton.setDisable(true);
+      playerButton.setDisable(true);
+      playButton.setText("Continue");
+      clearButton.setDisable(true);
 
-  private String formatCurrency(Object o) {
-    return NumberFormat.getCurrencyInstance(Locale.US).format(o);
-  }
+      displayCards();
+    } else {
+      player.settleWagers(currentCoup.getOutcome());
+      coupPlayed = false;
 
-}
-
-  /*
-  @FXML
-  private void handleActionButtonAction(ActionEvent event) {
-    if (coup.isFinished()) {
-      player.settleWagers(coup.getWinner());
-      coup = new Coup(game.getShoe());
-
+      balanceLabel.setText(formatCurrency(player.getBalance()));
       messageLabel.setText("");
-      balanceNumberLabel.setText(formatCurrency(player.getBalance()));
-      actionButton.setText("Deal");
       tieButton.setText("Tie");
       tieButton.setDisable(false);
       bankerButton.setText("Banker");
       bankerButton.setDisable(false);
       playerButton.setText("Player");
       playerButton.setDisable(false);
+      playButton.setText("Play");
+
       clearCards();
-    }
-    else {
-      clearButton.setDisable(true);
-      tieButton.setDisable(true);
-      bankerButton.setDisable(true);
-      playerButton.setDisable(true);
-
-      Card card = coup.deal();
-      displayCard(card);
-
-      if (coup.isFinished()) {
-        actionButton.setText("Continue");
-        if (coup.getWinner() == Outcome.PLAYER) {
-          messageLabel.setText("Player wins");
-        }
-        else if (coup.getWinner() == Outcome.BANKER) {
-          messageLabel.setText("Banker wins");
-        }
-        else {
-          messageLabel.setText("Tie");
-        }
-      }
     }
   }
 
   @FXML
-  private void handleClearButtonAction(ActionEvent event) {
+  private void onClearButtonAction() {
     player.clearWagers();
+
+    balanceLabel.setText(formatCurrency(player.getBalance()));
     messageLabel.setText("");
-    balanceNumberLabel.setText(formatCurrency(player.getBalance()));
-    clearButton.setDisable(true);
     tieButton.setText("Tie");
     bankerButton.setText("Banker");
     playerButton.setText("Player");
+    clearButton.setDisable(true);
   }
 
   private String formatCurrency(Object o) {
     return NumberFormat.getCurrencyInstance(Locale.US).format(o);
   }
 
-  private void displayCard(Card card) {
-    String cardPath = "/images/cards/" + card.toString().replace(" ", "_") + ".png";
-    Image cardImage = new Image(cardPath);
-
-    switch (coup.getCardNumber()) {
-      case 1:
-        playerCardView1.setImage(cardImage);
-        break;
-      case 2:
-        bankerCardView1.setImage(cardImage);
-        break;
-      case 3:
-        playerCardView2.setImage(cardImage);
-        break;
-      case 4:
-        bankerCardView2.setImage(cardImage);
-        break;
-      case 5:
-        if (coup.getCurrentHand() == Coup.Hand.PLAYER) {
-          playerCardView3.setImage(cardImage);
-        }
-        else {
-          bankerCardView3.setImage(cardImage);
-        }
-        break;
-      case 6:
-        bankerCardView3.setImage(cardImage);
-        break;
+  private void displayCards() {
+    playerCardImageView1.setImage(loadCardImage(currentCoup.getPlayerCard1()));
+    bankerCardImageView1.setImage(loadCardImage(currentCoup.getBankerCard1()));
+    playerCardImageView2.setImage(loadCardImage(currentCoup.getPlayerCard2()));
+    bankerCardImageView2.setImage(loadCardImage(currentCoup.getBankerCard2()));
+    if (currentCoup.getPlayerCard3() != null) {
+      playerCardImageView3.setImage(loadCardImage(currentCoup.getPlayerCard3()));
+    }
+    if (currentCoup.getBankerCard3() != null) {
+      bankerCardImageView3.setImage(loadCardImage(currentCoup.getBankerCard3()));
     }
   }
 
-  private void clearCards() {
-    playerCardView1.setImage(null);
-    playerCardView2.setImage(null);
-    playerCardView3.setImage(null);
-    bankerCardView1.setImage(null);
-    bankerCardView2.setImage(null);
-    bankerCardView3.setImage(null);
+  private Image loadCardImage(Card card) {
+    return new Image("/images/cards/" + card.toString().replace(" ", "_") + ".png");
   }
-  */
+
+  private void clearCards() {
+    playerCardImageView1.setImage(null);
+    playerCardImageView2.setImage(null);
+    playerCardImageView3.setImage(null);
+    bankerCardImageView1.setImage(null);
+    bankerCardImageView2.setImage(null);
+    bankerCardImageView3.setImage(null);
+  }
+
+}

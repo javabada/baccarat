@@ -26,18 +26,18 @@
   <center>
     <StackPane>
       <VBox styleClass="game-layout-wagers">
-        <Button fx:id="tieButton" onAction="#placeWagerAction" userData="Tie"/>
-        <Button fx:id="bankerButton" onAction="#placeWagerAction" userData="Banker"/>
-        <Button fx:id="playerButton" onAction="#placeWagerAction" userData="Player"/>
+        <Button fx:id="tieButton" onAction="#onPlaceWagerAction" userData="Tie"/>
+        <Button fx:id="bankerButton" onAction="#onPlaceWagerAction" userData="Banker"/>
+        <Button fx:id="playerButton" onAction="#onPlaceWagerAction" userData="Player"/>
       </VBox>
 
       <AnchorPane pickOnBounds="false">
-        <ImageView fx:id="playerCard1" AnchorPane.bottomAnchor="65" AnchorPane.leftAnchor="25" fitWidth="150" preserveRatio="true"/>
-        <ImageView fx:id="playerCard2" AnchorPane.bottomAnchor="45" AnchorPane.leftAnchor="55" fitWidth="150" preserveRatio="true"/>
-        <ImageView fx:id="playerCard3" AnchorPane.bottomAnchor="25" AnchorPane.leftAnchor="85" fitWidth="150" preserveRatio="true"/>
-        <ImageView fx:id="bankerCard1" AnchorPane.bottomAnchor="65" AnchorPane.rightAnchor="85" fitWidth="150" preserveRatio="true"/>
-        <ImageView fx:id="bankerCard2" AnchorPane.bottomAnchor="45" AnchorPane.rightAnchor="55" fitWidth="150" preserveRatio="true"/>
-        <ImageView fx:id="bankerCard3" AnchorPane.bottomAnchor="25" AnchorPane.rightAnchor="25" fitWidth="150" preserveRatio="true"/>
+        <ImageView fx:id="playerCardImageView1" AnchorPane.bottomAnchor="65" AnchorPane.leftAnchor="25" fitWidth="150" preserveRatio="true"/>
+        <ImageView fx:id="playerCardImageView2" AnchorPane.bottomAnchor="45" AnchorPane.leftAnchor="55" fitWidth="150" preserveRatio="true"/>
+        <ImageView fx:id="playerCardImageView3" AnchorPane.bottomAnchor="25" AnchorPane.leftAnchor="85" fitWidth="150" preserveRatio="true"/>
+        <ImageView fx:id="bankerCardImageView1" AnchorPane.bottomAnchor="65" AnchorPane.rightAnchor="85" fitWidth="150" preserveRatio="true"/>
+        <ImageView fx:id="bankerCardImageView2" AnchorPane.bottomAnchor="45" AnchorPane.rightAnchor="55" fitWidth="150" preserveRatio="true"/>
+        <ImageView fx:id="bankerCardImageView3" AnchorPane.bottomAnchor="25" AnchorPane.rightAnchor="25" fitWidth="150" preserveRatio="true"/>
       </AnchorPane>
     </StackPane>
   </center>
@@ -61,8 +61,8 @@
       </HBox>
 
       <HBox styleClass="game-layout-controls" pickOnBounds="false">
-        <Button fx:id="playButton"/>
-        <Button fx:id="clearButton" onAction="#clearAction" text="Clear"/>
+        <Button fx:id="playButton" onAction="#onPlayButtonAction"/>
+        <Button fx:id="clearButton" onAction="#onClearButtonAction" text="Clear"/>
       </HBox>
 
       <HBox styleClass="game-layout-info" pickOnBounds="false">
