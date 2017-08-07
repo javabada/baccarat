@@ -1,5 +1,6 @@
 package io.github.javabada.baccarat.game;
 
+import java.math.BigDecimal;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
@@ -100,34 +101,39 @@ public class PlayerTest {
   public void payoutOnPlayerWinShouldBeCorrectAmount() throws Exception {
     Player p = new Player("1000");
     p.placeWager(Outcome.PLAYER, "500");
-    p.settleWagers(Outcome.PLAYER);
+    BigDecimal winnings = p.settleWagers(Outcome.PLAYER);
     assertEquals("1500.00", p.getBalance().toString());
+    assertEquals("500.00", winnings.toString());
   }
 
   @Test
   public void payoutOnBankerWinShouldBeCorrectAmount() throws Exception {
     Player p = new Player("1000");
     p.placeWager(Outcome.BANKER, "100");
-    p.settleWagers(Outcome.BANKER);
+    BigDecimal winnings = p.settleWagers(Outcome.BANKER);
     assertEquals("1095.00", p.getBalance().toString());
+    assertEquals("95.00", winnings.toString());
   }
 
   @Test
   public void payoutOnTieShouldBeCorrectAmount() throws Exception {
     Player p = new Player("1000");
     p.placeWager(Outcome.TIE, "100");
-    p.settleWagers(Outcome.TIE);
+    BigDecimal winnings = p.settleWagers(Outcome.TIE);
     assertEquals("1800.00", p.getBalance().toString());
+    assertEquals("800.00", winnings.toString());
   }
 
   @Test
   public void wagersShouldBeCollectedOnLoss() throws Exception {
     Player p = new Player("1000");
     p.placeWager(Outcome.PLAYER, "100");
-    p.settleWagers(Outcome.BANKER);
+    BigDecimal winnings1 = p.settleWagers(Outcome.BANKER);
     p.placeWager(Outcome.BANKER, "200");
-    p.settleWagers(Outcome.PLAYER);
+    BigDecimal winnings2 = p.settleWagers(Outcome.PLAYER);
     assertEquals("700.00", p.getBalance().toString());
+    assertEquals("0.00", winnings1.toString());
+    assertEquals("0.00", winnings2.toString());
   }
 
   @Test
@@ -135,8 +141,9 @@ public class PlayerTest {
     Player p = new Player("1000");
     p.placeWager(Outcome.PLAYER, "200");
     p.placeWager(Outcome.BANKER, "500");
-    p.settleWagers(Outcome.TIE);
+    BigDecimal winnings = p.settleWagers(Outcome.TIE);
     assertEquals("1000.00", p.getBalance().toString());
+    assertEquals("0.00", winnings.toString());
   }
 
   @Test
@@ -145,8 +152,9 @@ public class PlayerTest {
     p.placeWager(Outcome.PLAYER, "200");
     p.placeWager(Outcome.BANKER, "300");
     p.placeWager(Outcome.TIE, "100");
-    p.settleWagers(Outcome.PLAYER);
+    BigDecimal winnings = p.settleWagers(Outcome.PLAYER);
     assertEquals("800.00", p.getBalance().toString());
+    assertEquals("200.00", winnings.toString());
   }
 
   @Test
@@ -155,8 +163,9 @@ public class PlayerTest {
     p.placeWager(Outcome.PLAYER, "300");
     p.placeWager(Outcome.BANKER, "100");
     p.placeWager(Outcome.TIE, "200");
-    p.settleWagers(Outcome.BANKER);
+    BigDecimal winnings = p.settleWagers(Outcome.BANKER);
     assertEquals("595.00", p.getBalance().toString());
+    assertEquals("95.00", winnings.toString());
   }
 
   @Test
@@ -165,8 +174,9 @@ public class PlayerTest {
     p.placeWager(Outcome.PLAYER, "100");
     p.placeWager(Outcome.BANKER, "200");
     p.placeWager(Outcome.TIE, "300");
-    p.settleWagers(Outcome.TIE);
+    BigDecimal winnings = p.settleWagers(Outcome.TIE);
     assertEquals("3400.00", p.getBalance().toString());
+    assertEquals("2400.00", winnings.toString());
   }
 
 }
