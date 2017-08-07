@@ -20,8 +20,8 @@ public class Player {
     return balance;
   }
 
-  // balance is deducted as wagers are placed, clear() will undo all placed wagers
-  // returns false without any changes if potential wager is greater than balance
+  // balance is deducted as wagers are placed, returns false without any changes
+  // if the potential wager is greater than the current balance
   public boolean placeWager(Outcome outcome, String amount) {
     BigDecimal wagerAmount = new BigDecimal(amount).setScale(SCALE, ROUNDING_MODE);
 
