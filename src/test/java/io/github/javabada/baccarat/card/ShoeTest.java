@@ -14,7 +14,7 @@ public class ShoeTest {
   }
 
   @Test
-  public void drawShouldRemoveSingleCardFromShoe() throws Exception {
+  public void drawShouldRemoveACardFromTheShoe() throws Exception {
     Shoe s = new Shoe(6);
     s.prepare();
     s.draw();
@@ -22,7 +22,7 @@ public class ShoeTest {
   }
 
   @Test
-  public void addAndDrawCardsShouldBeInCorrectOrder() throws Exception {
+  public void addAndDrawShouldBeFifo() throws Exception {
     Card c1 = new Card(Rank.ACE, Suit.HEARTS);
     Card c2 = new Card(Rank.SIX, Suit.SPADES);
     Card c3 = new Card(Rank.TWO, Suit.CLUBS);

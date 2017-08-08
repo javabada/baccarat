@@ -79,10 +79,10 @@ public class PlayerTest {
     p.placeWager(Outcome.BANKER, "200");
     p.placeWager(Outcome.TIE, "150");
     p.clearWagers();
-    assertEquals("1000.00", p.getBalance().toString());
     assertEquals("0.00", p.checkWager(Outcome.PLAYER).toString());
     assertEquals("0.00", p.checkWager(Outcome.BANKER).toString());
     assertEquals("0.00", p.checkWager(Outcome.TIE).toString());
+    assertEquals("1000.00", p.getBalance().toString());
   }
 
   @Test
