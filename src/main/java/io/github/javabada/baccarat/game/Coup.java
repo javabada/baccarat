@@ -40,12 +40,12 @@ public class Coup {
       playerScore = (playerScore + playerCard3.getValue()) % 10;
     }
 
-    if ((playerCard3 == null && bankerScore < 6) ||
+    if ((playerCard3 == null && bankerScore < 6) || (playerCard3 != null && (
         ((playerCard3.getValue() == 2 || playerCard3.getValue() == 3) && bankerScore < 5) ||
         ((playerCard3.getValue() == 4 || playerCard3.getValue() == 5) && bankerScore < 6) ||
         ((playerCard3.getValue() == 6 || playerCard3.getValue() == 7) && bankerScore < 7) ||
-         (playerCard3.getValue() == 8                                 && bankerScore < 3) ||
-        ((playerCard3.getValue() == 9 || playerCard3.getValue() <  2) && bankerScore < 4)) {
+        ( playerCard3.getValue() == 8                                 && bankerScore < 3) ||
+        ((playerCard3.getValue() == 9 || playerCard3.getValue() <  2) && bankerScore < 4)))) {
       // banker draws third card
       bankerCard3 = shoe.draw();
       bankerScore = (bankerScore + bankerCard3.getValue()) % 10;
