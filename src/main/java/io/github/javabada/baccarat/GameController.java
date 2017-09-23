@@ -1,6 +1,10 @@
-package io.github.javabada.baccarat.game;
+package io.github.javabada.baccarat;
 
 import io.github.javabada.baccarat.card.Card;
+import io.github.javabada.baccarat.game.Coup;
+import io.github.javabada.baccarat.game.Game;
+import io.github.javabada.baccarat.game.Outcome;
+import io.github.javabada.baccarat.game.Player;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -20,8 +24,6 @@ public class GameController {
 
   @FXML private Label balanceLabel;
   @FXML private Label messageLabel;
-  @FXML private Label playerScoreLabel;
-  @FXML private Label bankerScoreLabel;
   @FXML private Button tieButton;
   @FXML private Button bankerButton;
   @FXML private Button playerButton;
@@ -99,8 +101,6 @@ public class GameController {
       } else {
         messageLabel.setText("Player wins");
       }
-      playerScoreLabel.setText("Player score: " + currentCoup.getPlayerScore());
-      bankerScoreLabel.setText("Banker score: " + currentCoup.getBankerScore());
       tieButton.setDisable(true);
       bankerButton.setDisable(true);
       playerButton.setDisable(true);
@@ -114,8 +114,6 @@ public class GameController {
 
       balanceLabel.setText(formatCurrency(player.getBalance()));
       messageLabel.setText("");
-      playerScoreLabel.setText("");
-      bankerScoreLabel.setText("");
       tieButton.setText("Tie");
       tieButton.setDisable(false);
       bankerButton.setText("Banker");

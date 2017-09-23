@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.VBox?>
 
 <BorderPane xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
-            fx:controller="io.github.javabada.baccarat.game.GameController"
+            fx:controller="io.github.javabada.baccarat.GameController"
             prefHeight="600.0" prefWidth="800.0" stylesheets="/css/main.css">
 
   <top>
@@ -38,8 +38,6 @@
         <ImageView fx:id="bankerCardImageView1" AnchorPane.bottomAnchor="100" AnchorPane.rightAnchor="60" fitWidth="150" preserveRatio="true"/>
         <ImageView fx:id="bankerCardImageView2" AnchorPane.bottomAnchor="80" AnchorPane.rightAnchor="30" fitWidth="150" preserveRatio="true"/>
         <ImageView fx:id="bankerCardImageView3" AnchorPane.bottomAnchor="60" AnchorPane.rightAnchor="0" fitWidth="150" preserveRatio="true"/>
-        <Label fx:id="playerScoreLabel" AnchorPane.bottomAnchor="20" AnchorPane.leftAnchor="60"/>
-        <Label fx:id="bankerScoreLabel" AnchorPane.bottomAnchor="20" AnchorPane.rightAnchor="60"/>
       </AnchorPane>
     </StackPane>
   </center>

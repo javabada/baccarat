@@ -76,14 +76,6 @@ public class Coup {
     return bankerCard3;
   }
 
-  public int getPlayerScore() {
-    return playerScore;
-  }
-
-  public int getBankerScore() {
-    return bankerScore;
-  }
-
   public Outcome getOutcome() {
     if (playerScore > bankerScore) {
       return Outcome.PLAYER;
