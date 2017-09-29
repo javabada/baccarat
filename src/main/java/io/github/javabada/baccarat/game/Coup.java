@@ -1,7 +1,6 @@
 package io.github.javabada.baccarat.game;
 
 import io.github.javabada.baccarat.card.Card;
-import io.github.javabada.baccarat.card.Shoe;
 
 public class Coup {
 
