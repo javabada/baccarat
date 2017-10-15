@@ -17,10 +17,16 @@
             prefHeight="600.0" prefWidth="800.0" stylesheets="/css/main.css">
 
   <top>
-    <HBox>
-      <Label text="Balance: "/>
-      <Label fx:id="balanceLabel"/>
-    </HBox>
+    <StackPane>
+      <HBox styleClass="game-layout-balance">
+        <Label text="Balance: "/>
+        <Label fx:id="balanceLabel"/>
+      </HBox>
+      <HBox styleClass="game-layout-shoe-count">
+        <Label text="Cards in shoe: "/>
+        <Label fx:id="shoeCountLabel"/>
+      </HBox>
+    </StackPane>
   </top>
 
   <center>

@@ -19,6 +19,14 @@
 }
 
 /* custom layout classes */
+.game-layout-balance {
+  -fx-alignment: top-left;
+}
+
+.game-layout-shoe-count {
+  -fx-alignment: top-right;
+}
+
 .game-layout-wagers {
   -fx-alignment: bottom-center;
   -fx-padding: 0px 0px 20px 0px;

@@ -22,6 +22,7 @@ public class GameController {
   private Coup coup;
 
   @FXML private Label balanceLabel;
+  @FXML private Label shoeCountLabel;
   @FXML private Label messageLabel;
   @FXML private Button tieButton;
   @FXML private Button bankerButton;
@@ -47,6 +48,7 @@ public class GameController {
   // Cannot use FXML initialize() method, player and shoe needs to be set first
   public void init() {
     balanceLabel.setText(formatCurrency(player.getBalance()));
+    shoeCountLabel.setText(Integer.toString(shoe.count()));
     tieButton.setText("Tie");
     bankerButton.setText("Banker");
     playerButton.setText("Player");
@@ -96,6 +98,7 @@ public class GameController {
       shoe.fill();
       int cardsBurnt = shoe.burn();
 
+      shoeCountLabel.setText(Integer.toString(shoe.count()));
       messageLabel.setText("New shoe, " + cardsBurnt + " " +
           (cardsBurnt == 1 ? "card" : "cards") + " burnt");
       playButton.setText("Play");
@@ -103,6 +106,7 @@ public class GameController {
       coup = new Coup(shoe);
       coup.play();
 
+      shoeCountLabel.setText(Integer.toString(shoe.count()));
       if (coup.getOutcome() == Outcome.TIE) {
         messageLabel.setText("Tie");
       } else if (coup.getOutcome() == Outcome.BANKER) {
