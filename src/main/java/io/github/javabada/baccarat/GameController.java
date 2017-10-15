@@ -2,9 +2,9 @@ package io.github.javabada.baccarat;
 
 import io.github.javabada.baccarat.card.Card;
 import io.github.javabada.baccarat.game.Coup;
-import io.github.javabada.baccarat.game.Game;
 import io.github.javabada.baccarat.game.Outcome;
 import io.github.javabada.baccarat.game.Player;
+import io.github.javabada.baccarat.game.Shoe;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -18,9 +18,8 @@ import java.util.Locale;
 public class GameController {
 
   private Player player;
-  private Game game;
-  private Coup currentCoup;
-  private boolean coupPlayed;
+  private Shoe shoe;
+  private Coup coup;
 
   @FXML private Label balanceLabel;
   @FXML private Label messageLabel;
@@ -37,18 +36,21 @@ public class GameController {
   @FXML private ImageView bankerCardImageView2;
   @FXML private ImageView bankerCardImageView3;
 
-  @FXML
-  private void initialize() {
-    player = new Player("10000");
-    game = new Game();
-    game.newShoe(8);
-    coupPlayed = false;
+  public void setPlayer(Player player) {
+    this.player = player;
+  }
 
+  public void setShoe(Shoe shoe) {
+    this.shoe = shoe;
+  }
+
+  // Cannot use FXML initialize() method, player and shoe needs to be set first
+  public void init() {
     balanceLabel.setText(formatCurrency(player.getBalance()));
     tieButton.setText("Tie");
     bankerButton.setText("Banker");
     playerButton.setText("Player");
-    playButton.setText("Play");
+    playButton.setText("Begin");
     clearButton.setDisable(true);
   }
 
@@ -90,13 +92,20 @@ public class GameController {
 
   @FXML
   private void onPlayButtonAction() {
-    if (!coupPlayed) {
-      currentCoup = game.playNewCoup();
-      coupPlayed = true;
+    if (playButton.getText().equals("Begin")) {
+      shoe.fill();
+      int cardsBurnt = shoe.burn();
 
-      if (currentCoup.getOutcome() == Outcome.TIE) {
+      messageLabel.setText("New shoe, " + cardsBurnt + " " +
+          (cardsBurnt == 1 ? "card" : "cards") + " burnt");
+      playButton.setText("Play");
+    } else if (playButton.getText().equals("Play")) {
+      coup = new Coup(shoe);
+      coup.play();
+
+      if (coup.getOutcome() == Outcome.TIE) {
         messageLabel.setText("Tie");
-      } else if (currentCoup.getOutcome() == Outcome.BANKER) {
+      } else if (coup.getOutcome() == Outcome.BANKER) {
         messageLabel.setText("Banker wins");
       } else {
         messageLabel.setText("Player wins");
@@ -107,10 +116,9 @@ public class GameController {
       playButton.setText("Continue");
       clearButton.setDisable(true);
 
-      displayCards();
+      displayCards(coup);
     } else {
-      player.settleWagers(currentCoup.getOutcome());
-      coupPlayed = false;
+      player.settleWagers(coup.getOutcome());
 
       balanceLabel.setText(formatCurrency(player.getBalance()));
       messageLabel.setText("");
@@ -142,16 +150,16 @@ public class GameController {
     return NumberFormat.getCurrencyInstance(Locale.US).format(o);
   }
 
-  private void displayCards() {
-    playerCardImageView1.setImage(loadCardImage(currentCoup.getPlayerCard1()));
-    bankerCardImageView1.setImage(loadCardImage(currentCoup.getBankerCard1()));
-    playerCardImageView2.setImage(loadCardImage(currentCoup.getPlayerCard2()));
-    bankerCardImageView2.setImage(loadCardImage(currentCoup.getBankerCard2()));
-    if (currentCoup.getPlayerCard3() != null) {
-      playerCardImageView3.setImage(loadCardImage(currentCoup.getPlayerCard3()));
+  private void displayCards(Coup coup) {
+    playerCardImageView1.setImage(loadCardImage(coup.getPlayerCard1()));
+    bankerCardImageView1.setImage(loadCardImage(coup.getBankerCard1()));
+    playerCardImageView2.setImage(loadCardImage(coup.getPlayerCard2()));
+    bankerCardImageView2.setImage(loadCardImage(coup.getBankerCard2()));
+    if (coup.getPlayerCard3() != null) {
+      playerCardImageView3.setImage(loadCardImage(coup.getPlayerCard3()));
     }
-    if (currentCoup.getBankerCard3() != null) {
-      bankerCardImageView3.setImage(loadCardImage(currentCoup.getBankerCard3()));
+    if (coup.getBankerCard3() != null) {
+      bankerCardImageView3.setImage(loadCardImage(coup.getBankerCard3()));
     }
   }
 

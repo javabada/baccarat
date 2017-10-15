@@ -36,13 +36,13 @@ public class Shoe {
   }
 
   // draw one card and burn a further amount of cards based on the card value
-  public Card burn() {
+  public int burn() {
     Card topCard = draw();
-    int cardsToBurn = (topCard.getValue() == 0 ? 10 : topCard.getValue()) - 1;
-    for (int i = 0; i < cardsToBurn; i++) {
+    int burnAmount = topCard.getValue() == 0 ? 10 : topCard.getValue();
+    for (int i = 0; i < burnAmount - 1; i++) {
       draw();
     }
-    return topCard;
+    return burnAmount;
   }
 
   public int count() {
