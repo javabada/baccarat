@@ -1,14 +1,27 @@
-group 'io.github.javabada.baccarat'
-version '1.0-SNAPSHOT'
-
-apply plugin: 'java'
-
-sourceCompatibility = 1.8
+buildscript {
+  repositories {
+    jcenter()
+  }
+  dependencies {
+    classpath 'org.junit.platform:junit-platform-gradle-plugin:1.0.2'
+  }
+}
 
 repositories {
-  mavenCentral()
+  jcenter()
 }
 
+apply plugin: 'java'
+apply plugin: 'application'
+apply plugin: 'org.junit.platform.gradle.plugin'
+
 dependencies {
-  testCompile group: 'junit', name: 'junit', version: '4.12'
+  // JUnit Jupiter API and test engine implementation
+  testCompile 'org.junit.jupiter:junit-jupiter-api:5.0.2'
+  testRuntime 'org.junit.jupiter:junit-jupiter-engine:5.0.2'
+
+  // Avoid compiler warnings about @API annotations in JUnit code
+  testCompileOnly 'org.apiguardian:apiguardian-api:1.0.0'
 }
+
+mainClassName = 'io.github.javabada.baccarat.Main'
