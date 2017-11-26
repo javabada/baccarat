@@ -1,4 +1,4 @@
-package io.github.javabada.baccarat.card;
+package io.github.javabada.baccarat.game;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;

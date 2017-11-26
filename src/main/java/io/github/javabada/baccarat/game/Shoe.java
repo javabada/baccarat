@@ -1,4 +1,4 @@
-package io.github.javabada.baccarat.card;
+package io.github.javabada.baccarat.game;
 
 import java.util.ArrayList;
 import java.util.Collections;
