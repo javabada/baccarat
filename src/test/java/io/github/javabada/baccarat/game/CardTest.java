@@ -1,29 +1,25 @@
 package io.github.javabada.baccarat.game;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
 class CardTest {
 
   @Test
-  void cardRepresentsAValueBetween0And9() {
-    Card card = new Card(Rank.TWO, Suit.CLUBS);
-    assertTrue(card.getValue() >= 0 && card.getValue() <= 9);
+  void cardHas13DifferentRanks() {
+    assertEquals(13, Rank.values().length);
   }
 
   @Test
-  void cardDerivesItsValueFromCardRank() {
-    Card card = new Card(Rank.FIVE, Suit.SPADES);
-    assertEquals(5, card.getValue());
+  void cardHas4DifferentSuits() {
+    assertEquals(4, Suit.values().length);
   }
 
   @Test
-  void cardSuitDoesNotAffectCardValue() {
-    Card card1 = new Card(Rank.JACK, Suit.SPADES);
-    Card card2 = new Card(Rank.KING, Suit.DIAMONDS);
-    assertTrue(card1.getValue() == card2.getValue());
+  void cardDerivesItsValueInBaccaratFromCardRank() {
+    Card card = new Card(Rank.JACK, Suit.SPADES);
+    assertEquals(0, card.getValue());
   }
 
 }
