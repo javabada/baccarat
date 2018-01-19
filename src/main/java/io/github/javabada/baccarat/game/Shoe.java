@@ -26,7 +26,6 @@ public class Shoe {
     }
 
     // Shuffle shoe
-    // REVIEW: How to test?
     Collections.shuffle(shoe);
   }
 

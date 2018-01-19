@@ -4,21 +4,23 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
 
+// A playing card in baccarat needs to represent a value based on its rank.
+
 class CardTest {
 
   @Test
-  void cardHas13DifferentRanks() {
+  void cardHas13PossibleRanks() {
     assertEquals(13, Rank.values().length);
   }
 
   @Test
-  void cardHas4DifferentSuits() {
+  void cardHas4PossibleSuits() {
     assertEquals(4, Suit.values().length);
   }
 
   @Test
-  void cardDerivesItsValueInBaccaratFromCardRank() {
-    Card card = new Card(Rank.JACK, Suit.SPADES);
+  void cardRepresentsAValueInBaccarat() {
+    Card card = new Card(Rank.TEN, Suit.CLUBS);
     assertEquals(0, card.getValue());
   }
 

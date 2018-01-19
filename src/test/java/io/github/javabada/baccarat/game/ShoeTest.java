@@ -6,10 +6,12 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
+// A shoe holds multiple number of decks shuffled together.
+
 class ShoeTest {
 
   @Test
-  void drawFromShoeReturnsACard() {
+  void drawReturnsACard() {
     Shoe shoe = new Shoe();
     shoe.fill(8);
     assertTrue(shoe.draw() instanceof Card);
@@ -38,7 +40,7 @@ class ShoeTest {
   }
 
   @Test
-  void newShoeClearsRemainingCardsFromOldShoe() {
+  void refillingShoeClearsOldCards() {
     Shoe shoe = new Shoe();
     shoe.fill(6);
     shoe.fill(8);
