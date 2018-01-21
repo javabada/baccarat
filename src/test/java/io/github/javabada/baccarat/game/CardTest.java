@@ -4,8 +4,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
 
-// A playing card in baccarat needs to represent a value based on its rank.
-
 class CardTest {
 
   @Test

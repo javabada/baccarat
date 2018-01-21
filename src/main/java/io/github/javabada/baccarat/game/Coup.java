@@ -1,5 +1,7 @@
 package io.github.javabada.baccarat.game;
 
+// A coup is a round of play in baccarat.
+
 public class Coup {
 
   private final Shoe shoe;
@@ -31,11 +33,9 @@ public class Coup {
   public Outcome getOutcome() {
     if (playerScore > bankerScore) {
       return Outcome.PLAYER;
-    }
-    else if (bankerScore > playerScore) {
+    } else if (bankerScore > playerScore) {
       return Outcome.BANKER;
-    }
-    else {
+    } else {
       return Outcome.TIE;
     }
   }
