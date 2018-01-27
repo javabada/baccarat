@@ -51,7 +51,7 @@ class ShoeTest {
       Shoe shoe = new Shoe();
       shoe.draw();
     });
-    assertEquals("Shoe is empty", exception.getMessage());
+    assertEquals("Shoe is empty, use fill()", exception.getMessage());
   }
 
 }
