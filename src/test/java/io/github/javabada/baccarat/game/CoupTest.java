@@ -94,4 +94,41 @@ class CoupTest {
     });
   }
 
+  @Test
+  void naturalDrawsFourCards() {
+    when(shoe.draw()).thenReturn(
+      new Card(Rank.TEN, Suit.CLUBS),
+      new Card(Rank.TWO, Suit.CLUBS),
+      new Card(Rank.EIGHT, Suit.CLUBS),
+      new Card(Rank.QUEEN, Suit.CLUBS)
+    );
+    coup.play();
+    verify(shoe, times(4)).draw();
+  }
+
+  @Test
+  void playerAndBankerStands() {
+    when(shoe.draw()).thenReturn(
+      new Card(Rank.TEN, Suit.CLUBS),
+      new Card(Rank.ACE, Suit.CLUBS),
+      new Card(Rank.SIX, Suit.CLUBS),
+      new Card(Rank.SIX, Suit.CLUBS)
+    );
+    coup.play();
+    verify(shoe, times(4)).draw();
+  }
+
+  @Test
+  void playerStandsBankerDraws() {
+    when(shoe.draw()).thenReturn(
+      new Card(Rank.TEN, Suit.CLUBS),
+      new Card(Rank.ACE, Suit.CLUBS),
+      new Card(Rank.SIX, Suit.CLUBS),
+      new Card(Rank.TWO, Suit.CLUBS),
+      new Card(Rank.TWO, Suit.CLUBS)
+    );
+    coup.play();
+    verify(shoe, times(5)).draw();
+  }
+
 }

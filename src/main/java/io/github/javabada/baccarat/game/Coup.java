@@ -9,8 +9,10 @@ public class Coup {
 
   private Card playerCard1;
   private Card playerCard2;
+  private Card playerCard3;
   private Card bankerCard1;
   private Card bankerCard2;
+  private Card bankerCard3;
 
   private boolean coupFinished = false;
 
@@ -26,6 +28,18 @@ public class Coup {
 
     playerScore = (playerCard1.getValue() + playerCard2.getValue()) % 10;
     bankerScore = (bankerCard1.getValue() + bankerCard2.getValue()) % 10;
+
+    if (playerScore > 7 || bankerScore > 7) {
+      coupFinished = true;
+      return;
+    }
+
+    if (playerCard3 == null) {
+      if (bankerScore < 6) {
+        bankerCard3 = shoe.draw();
+        bankerScore = (bankerScore + bankerCard3.getValue()) % 10;
+      }
+    }
 
     coupFinished = true;
   }
