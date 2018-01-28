@@ -33,7 +33,7 @@ public class Shoe {
 
   public Card draw() {
     if (shoe.isEmpty()) {
-      throw new IllegalStateException("Shoe is empty, use fill()");
+      throw new IllegalStateException("Shoe is empty");
     }
 
     return shoe.remove(0);
