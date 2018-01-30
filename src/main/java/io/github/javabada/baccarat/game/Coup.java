@@ -1,93 +1,74 @@
 package io.github.javabada.baccarat.game;
 
+import java.util.Map;
+
 public class Coup {
+
+  private static final Map<Integer, Integer> BANKER_MAP = Map.of(
+    1, 4,
+    2, 5,
+    3, 5,
+    4, 6,
+    5, 6,
+    6, 7,
+    7, 7,
+    8, 3,
+    9, 4,
+    0, 4
+  );
 
   private final Shoe shoe;
 
-  private int playerScore = 0;
-  private int bankerScore = 0;
-
-  private Card playerCard1;
-  private Card playerCard2;
-  private Card playerCard3;
-  private Card bankerCard1;
-  private Card bankerCard2;
-  private Card bankerCard3;
-
-  private boolean coupFinished = false;
+  private final Hand playerHand = new Hand();
+  private final Hand bankerHand = new Hand();
 
   public Coup(Shoe shoe) {
     this.shoe = shoe;
   }
 
-  public void play() {
-    playerCard1 = shoe.draw();
-    bankerCard1 = shoe.draw();
-    playerCard2 = shoe.draw();
-    bankerCard2 = shoe.draw();
+  public Outcome play() {
+    playerHand.add(shoe.draw());
+    bankerHand.add(shoe.draw());
+    playerHand.add(shoe.draw());
+    bankerHand.add(shoe.draw());
 
-    playerScore = (playerCard1.getValue() + playerCard2.getValue()) % 10;
-    bankerScore = (bankerCard1.getValue() + bankerCard2.getValue()) % 10;
-
-    if (playerScore > 7 || bankerScore > 7) {
-      coupFinished = true;
-      return;
+    // Natural, coup ends
+    if (playerHand.getValue() > 7 || bankerHand.getValue() > 7) {
+      return getOutcome();
     }
 
-    if (playerCard3 == null) {
-      if (bankerScore < 6) {
-        bankerCard3 = shoe.draw();
-        bankerScore = (bankerScore + bankerCard3.getValue()) % 10;
+    // Player's third card rule
+    if (playerHand.getValue() < 6) {
+      playerHand.add(shoe.draw());
+    }
+
+    // Banker's third card rule
+    if (playerHand.count() == 2) {
+      if (bankerHand.getValue() < 6) {
+        bankerHand.add(shoe.draw());
       }
+    } else if (bankerHand.getValue() < BANKER_MAP.get(playerHand.get(2).getValue())) {
+      bankerHand.add(shoe.draw());
     }
 
-    coupFinished = true;
+    return getOutcome();
   }
 
-  public Outcome getOutcome() {
-    checkState();
-    if (playerScore > bankerScore) {
+  public Hand getPlayerHand() {
+    return playerHand;
+  }
+
+  public Hand getBankerHand() {
+    return bankerHand;
+  }
+
+  private Outcome getOutcome() {
+    if (playerHand.getValue() > bankerHand.getValue()) {
       return Outcome.PLAYER;
-    } else if (bankerScore > playerScore) {
+    } else if (bankerHand.getValue() > playerHand.getValue()) {
       return Outcome.BANKER;
     } else {
       return Outcome.TIE;
-    }
-  }
-
-  public int getPlayerScore() {
-    checkState();
-    return playerScore;
-  }
-
-  public int getBankerScore() {
-    checkState();
-    return bankerScore;
-  }
-
-  public Card getPlayerCard1() {
-    checkState();
-    return playerCard1;
-  }
-
-  public Card getPlayerCard2() {
-    checkState();
-    return playerCard2;
-  }
-
-  public Card getBankerCard1() {
-    checkState();
-    return bankerCard1;
-  }
-
-  public Card getBankerCard2() {
-    checkState();
-    return bankerCard2;
-  }
-
-  private void checkState() {
-    if (!coupFinished) {
-      throw new IllegalStateException("Coup needs to be played, use play()");
     }
   }
 

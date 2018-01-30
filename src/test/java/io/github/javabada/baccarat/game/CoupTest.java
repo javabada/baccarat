@@ -1,10 +1,8 @@
 package io.github.javabada.baccarat.game;
 
+import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -22,113 +20,123 @@ class CoupTest {
   }
 
   @Test
-  void playerWinWithNatural8() {
+  void playerShouldWinWithNatural() {
     when(shoe.draw()).thenReturn(
-      new Card(Rank.TEN, Suit.CLUBS),
-      new Card(Rank.TWO, Suit.CLUBS),
-      new Card(Rank.EIGHT, Suit.CLUBS),
-      new Card(Rank.QUEEN, Suit.CLUBS)
+        new Card(Rank.TEN, Suit.CLUBS),
+        new Card(Rank.TWO, Suit.CLUBS),
+        new Card(Rank.EIGHT, Suit.CLUBS),
+        new Card(Rank.QUEEN, Suit.CLUBS)
+    );
+    assertEquals(Outcome.PLAYER, coup.play());
+  }
+
+  @Test
+  void bankerShouldWinWithNatural() {
+    when(shoe.draw()).thenReturn(
+        new Card(Rank.TEN, Suit.CLUBS),
+        new Card(Rank.TWO, Suit.CLUBS),
+        new Card(Rank.EIGHT, Suit.CLUBS),
+        new Card(Rank.SEVEN, Suit.CLUBS)
+    );
+    assertEquals(Outcome.BANKER, coup.play());
+  }
+
+  @Test
+  void tieWithNatural() {
+    when(shoe.draw()).thenReturn(
+        new Card(Rank.TWO, Suit.CLUBS),
+        new Card(Rank.TWO, Suit.CLUBS),
+        new Card(Rank.SIX, Suit.CLUBS),
+        new Card(Rank.SIX, Suit.CLUBS)
+    );
+    assertEquals(Outcome.TIE, coup.play());
+  }
+
+  @Test
+  void bothShouldDraw2CardsEachWithNatural() {
+    when(shoe.draw()).thenReturn(
+        new Card(Rank.TEN, Suit.CLUBS),
+        new Card(Rank.TWO, Suit.CLUBS),
+        new Card(Rank.EIGHT, Suit.CLUBS),
+        new Card(Rank.QUEEN, Suit.CLUBS),
+        new Card(Rank.ACE, Suit.CLUBS),
+        new Card(Rank.ACE, Suit.CLUBS)
     );
     coup.play();
-    assertEquals(Outcome.PLAYER, coup.getOutcome());
+    assertAll(
+        () -> assertEquals(2, coup.getPlayerHand().count()),
+        () -> assertEquals(2, coup.getBankerHand().count())
+    );
   }
 
   @Test
-  void bankerWinWithNatural9() {
+  void bothShouldStandAndDraw2CardsEach() {
     when(shoe.draw()).thenReturn(
-      new Card(Rank.TEN, Suit.CLUBS),
-      new Card(Rank.TWO, Suit.CLUBS),
-      new Card(Rank.EIGHT, Suit.CLUBS),
-      new Card(Rank.SEVEN, Suit.CLUBS)
+        new Card(Rank.TEN, Suit.CLUBS),
+        new Card(Rank.ACE, Suit.CLUBS),
+        new Card(Rank.SIX, Suit.CLUBS),
+        new Card(Rank.SIX, Suit.CLUBS),
+        new Card(Rank.ACE, Suit.CLUBS),
+        new Card(Rank.ACE, Suit.CLUBS)
     );
     coup.play();
-    assertEquals(Outcome.BANKER, coup.getOutcome());
+    assertAll(
+        () -> assertEquals(2, coup.getPlayerHand().count()),
+        () -> assertEquals(2, coup.getBankerHand().count())
+    );
   }
 
   @Test
-  void tieWithNatural8() {
+  void playerShouldStandAndBankerShouldDraw3Cards() {
     when(shoe.draw()).thenReturn(
-      new Card(Rank.TWO, Suit.CLUBS),
-      new Card(Rank.TWO, Suit.CLUBS),
-      new Card(Rank.SIX, Suit.CLUBS),
-      new Card(Rank.SIX, Suit.CLUBS)
+        new Card(Rank.TEN, Suit.CLUBS),
+        new Card(Rank.ACE, Suit.CLUBS),
+        new Card(Rank.SIX, Suit.CLUBS),
+        new Card(Rank.TWO, Suit.CLUBS),
+        new Card(Rank.TWO, Suit.CLUBS),
+        new Card(Rank.ACE, Suit.CLUBS)
     );
     coup.play();
-    assertEquals(Outcome.TIE, coup.getOutcome());
+    assertAll(
+        () -> assertEquals(2, coup.getPlayerHand().count()),
+        () -> assertEquals(3, coup.getBankerHand().count())
+    );
   }
 
+  // REVIEW: Test cases for banker's third card rule
+
   @Test
-  void scoresSumCorrectly() {
+  void playerShouldDraw3CardsAndBankerShouldStand() {
     when(shoe.draw()).thenReturn(
-      new Card(Rank.NINE, Suit.CLUBS),
-      new Card(Rank.NINE, Suit.CLUBS),
-      new Card(Rank.NINE, Suit.CLUBS),
-      new Card(Rank.FIVE, Suit.CLUBS)
+        new Card(Rank.ACE, Suit.CLUBS),
+        new Card(Rank.ACE, Suit.CLUBS),
+        new Card(Rank.TWO, Suit.CLUBS),
+        new Card(Rank.FOUR, Suit.CLUBS),
+        new Card(Rank.TWO, Suit.CLUBS),
+        new Card(Rank.ACE, Suit.CLUBS)
     );
     coup.play();
-    assertEquals(8, coup.getPlayerScore());
-    assertEquals(4, coup.getBankerScore());
+    assertAll(
+        () -> assertEquals(3, coup.getPlayerHand().count()),
+        () -> assertEquals(2, coup.getBankerHand().count())
+    );
   }
 
   @Test
-  void getOutcomeBeforeCoupPlayThrowsException() {
-    Throwable exception = assertThrows(IllegalStateException.class, () -> {
-      coup.getOutcome();
-    });
-    assertEquals("Coup needs to be played, use play()", exception.getMessage());
-  }
-
-  @Test
-  void getScoreBeforeCoupPlayThrowsException() {
-    Throwable exception = assertThrows(IllegalStateException.class, () -> {
-      coup.getPlayerScore();
-      // Also for banker score
-    });
-  }
-
-  @Test
-  void getCardBeforeCoupPlayThrowsException() {
-    Throwable exception = assertThrows(IllegalStateException.class, () -> {
-      coup.getPlayerCard1();
-      // Also for other cards
-    });
-  }
-
-  @Test
-  void naturalDrawsFourCards() {
+  void bothShouldDraw3CardsEach() {
     when(shoe.draw()).thenReturn(
-      new Card(Rank.TEN, Suit.CLUBS),
-      new Card(Rank.TWO, Suit.CLUBS),
-      new Card(Rank.EIGHT, Suit.CLUBS),
-      new Card(Rank.QUEEN, Suit.CLUBS)
+        new Card(Rank.ACE, Suit.CLUBS),
+        new Card(Rank.ACE, Suit.CLUBS),
+        new Card(Rank.TWO, Suit.CLUBS),
+        new Card(Rank.TWO, Suit.CLUBS),
+        new Card(Rank.THREE, Suit.CLUBS),
+        new Card(Rank.THREE, Suit.CLUBS)
     );
     coup.play();
-    verify(shoe, times(4)).draw();
-  }
-
-  @Test
-  void playerAndBankerStands() {
-    when(shoe.draw()).thenReturn(
-      new Card(Rank.TEN, Suit.CLUBS),
-      new Card(Rank.ACE, Suit.CLUBS),
-      new Card(Rank.SIX, Suit.CLUBS),
-      new Card(Rank.SIX, Suit.CLUBS)
+    assertAll(
+        () -> assertEquals(3, coup.getPlayerHand().count()),
+        () -> assertEquals(3, coup.getBankerHand().count())
     );
-    coup.play();
-    verify(shoe, times(4)).draw();
-  }
-
-  @Test
-  void playerStandsBankerDraws() {
-    when(shoe.draw()).thenReturn(
-      new Card(Rank.TEN, Suit.CLUBS),
-      new Card(Rank.ACE, Suit.CLUBS),
-      new Card(Rank.SIX, Suit.CLUBS),
-      new Card(Rank.TWO, Suit.CLUBS),
-      new Card(Rank.TWO, Suit.CLUBS)
-    );
-    coup.play();
-    verify(shoe, times(5)).draw();
   }
 
 }
