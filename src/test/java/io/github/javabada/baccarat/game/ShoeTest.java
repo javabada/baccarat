@@ -9,28 +9,28 @@ import org.junit.jupiter.api.Test;
 class ShoeTest {
 
   @Test
-  void drawReturnsACard() {
+  void drawShouldReturnACard() {
     Shoe shoe = new Shoe();
     shoe.fill(8);
     assertTrue(shoe.draw() instanceof Card);
   }
 
   @Test
-  void shoeWith8DecksStartWith416Cards() {
+  void shoeWith8DecksShouldFillWith416Cards() {
     Shoe shoe = new Shoe();
     shoe.fill(8);
     assertEquals(416, shoe.count());
   }
 
   @Test
-  void shoeWith6DecksStartWith312Cards() {
+  void shoeWith6DecksShouldFillWith312Cards() {
     Shoe shoe = new Shoe();
     shoe.fill(6);
     assertEquals(312, shoe.count());
   }
 
   @Test
-  void drawRemovesACardFromShoe() {
+  void drawShouldRemoveACard() {
     Shoe shoe = new Shoe();
     shoe.fill(8);
     shoe.draw();
@@ -38,7 +38,7 @@ class ShoeTest {
   }
 
   @Test
-  void refillingShoeClearsOldCards() {
+  void refillingShoeShouldClearOldCards() {
     Shoe shoe = new Shoe();
     shoe.fill(6);
     shoe.fill(8);
@@ -46,8 +46,8 @@ class ShoeTest {
   }
 
   @Test
-  void drawWhenShoeIsEmptyThrowsException() {
-    Throwable exception = assertThrows(IllegalStateException.class, () -> {
+  void drawShouldThrowExceptionWhenShoeIsEmpty() {
+    assertThrows(IllegalStateException.class, () -> {
       Shoe shoe = new Shoe();
       shoe.draw();
     });

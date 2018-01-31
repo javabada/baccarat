@@ -16,13 +16,13 @@ class HandTest {
     hand.add(card1);
     hand.add(card2);
     assertAll(
-      () -> assertEquals(card1, hand.get(0)),
-      () -> assertEquals(card2, hand.get(1))
+        () -> assertEquals(card1, hand.get(0)),
+        () -> assertEquals(card2, hand.get(1))
     );
   }
 
   @Test
-  void handShouldKeepCountOfCards() {
+  void handShouldKeepCardCount() {
     Hand hand = new Hand();
     hand.add(new Card(Rank.ACE, Suit.CLUBS));
     assertEquals(1, hand.count());
@@ -40,12 +40,21 @@ class HandTest {
   }
 
   @Test
-  void handShouldReturnItsBaccaratValue() {
+  void handShouldReturnItsBaccaratValueOf4() {
     Hand hand = new Hand();
     hand.add(new Card(Rank.FIVE, Suit.CLUBS));
     hand.add(new Card(Rank.NINE, Suit.CLUBS));
     hand.add(new Card(Rank.JACK, Suit.CLUBS));
     assertEquals(4, hand.getValue());
+  }
+
+  @Test
+  void handShouldReturnItsBaccaratValueOf7() {
+    Hand hand = new Hand();
+    hand.add(new Card(Rank.NINE, Suit.CLUBS));
+    hand.add(new Card(Rank.FOUR, Suit.CLUBS));
+    hand.add(new Card(Rank.FOUR, Suit.CLUBS));
+    assertEquals(7, hand.getValue());
   }
 
 }

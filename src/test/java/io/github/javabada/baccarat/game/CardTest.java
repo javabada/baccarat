@@ -7,17 +7,17 @@ import org.junit.jupiter.api.Test;
 class CardTest {
 
   @Test
-  void cardHas13PossibleRanks() {
+  void cardShouldHave13PossibleRanks() {
     assertEquals(13, Rank.values().length);
   }
 
   @Test
-  void cardHas4PossibleSuits() {
+  void cardShouldHave4PossibleSuits() {
     assertEquals(4, Suit.values().length);
   }
 
   @Test
-  void cardRepresentsAValueInBaccarat() {
+  void cardShouldHaveAValueInBaccarat() {
     Card card = new Card(Rank.TEN, Suit.CLUBS);
     assertEquals(0, card.getValue());
   }

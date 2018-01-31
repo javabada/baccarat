@@ -35,7 +35,6 @@ public class Shoe {
     if (shoe.isEmpty()) {
       throw new IllegalStateException("Shoe is empty");
     }
-
     return shoe.remove(0);
   }
 
