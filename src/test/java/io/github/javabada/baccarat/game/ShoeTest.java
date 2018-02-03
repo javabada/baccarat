@@ -47,10 +47,11 @@ class ShoeTest {
 
   @Test
   void drawShouldThrowExceptionWhenShoeIsEmpty() {
-    assertThrows(IllegalStateException.class, () -> {
+    Throwable exception = assertThrows(IllegalStateException.class, () -> {
       Shoe shoe = new Shoe();
       shoe.draw();
     });
+    assertEquals("Shoe is empty", exception.getMessage());
   }
 
 }

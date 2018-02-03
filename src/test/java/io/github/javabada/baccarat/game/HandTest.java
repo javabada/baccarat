@@ -16,8 +16,8 @@ class HandTest {
     hand.add(card1);
     hand.add(card2);
     assertAll(
-        () -> assertEquals(card1, hand.get(0)),
-        () -> assertEquals(card2, hand.get(1))
+      () -> assertEquals(card1, hand.get(0)),
+      () -> assertEquals(card2, hand.get(1))
     );
   }
 
@@ -34,9 +34,9 @@ class HandTest {
     hand.add(new Card(Rank.ACE, Suit.CLUBS));
     hand.add(new Card(Rank.TWO, Suit.CLUBS));
     hand.add(new Card(Rank.SIX, Suit.CLUBS));
-    assertThrows(IllegalStateException.class,
-        () -> hand.add(new Card(Rank.TEN, Suit.CLUBS))
-    );
+    Throwable exception = assertThrows(IllegalStateException.class,
+        () -> hand.add(new Card(Rank.TEN, Suit.CLUBS)));
+    assertEquals("Hand cannot hold more than 3 cards", exception.getMessage());
   }
 
   @Test

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-// A shoe holds multiple number of decks shuffled together.
+// A shoe holds multiple number of decks shuffled together
 
 public class Shoe {
 
