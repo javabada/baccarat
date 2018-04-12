@@ -1,27 +1,23 @@
-buildscript {
-  repositories {
-    jcenter()
-  }
-  dependencies {
-    classpath 'org.junit.platform:junit-platform-gradle-plugin:1.0.2'
-  }
+plugins {
+  id 'java'
 }
 
 repositories {
   jcenter()
 }
 
-apply plugin: 'java'
-apply plugin: 'org.junit.platform.gradle.plugin'
+test {
+  useJUnitPlatform()
+}
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
 
 dependencies {
-  // JUnit Jupiter API and test engine implementation
-  testCompile 'org.junit.jupiter:junit-jupiter-api:5.0.2'
-  testRuntime 'org.junit.jupiter:junit-jupiter-engine:5.0.2'
+  // JUnit
+  testImplementation 'org.junit.jupiter:junit-jupiter-api:5.1.1'
+  testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.1.1'
 
   // Mockito
-  testCompile 'org.mockito:mockito-core:2.+'
-
-  // Avoid compiler warnings about @API annotations in JUnit code
-  testCompileOnly 'org.apiguardian:apiguardian-api:1.0.0'
+  testImplementation 'org.mockito:mockito-core:2.18.0'
 }
